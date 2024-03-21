@@ -12,7 +12,7 @@
   };
 
   home.packages = with pkgs; [
-    (import (fetchTarball "https://github.com/cachix/devenv/archive/v0.6.3.tar.gz")).default
+    (import (fetchTarball https://install.devenv.sh/latest)).default
 
     # Misc
     cachix
