@@ -1,6 +1,17 @@
 { config, pkgs, ... }:
 
+let
+  nixvim = import (builtins.fetchGit {
+    url = "https://github.com/nix-community/nixvim";
+  });
+in
 {
+  nixpkgs.config.allowUnfree = true;
+
+  imports = [
+    nixvim.homeManagerModules.nixvim
+  ];
+
   home.username = "zohar";
   home.homeDirectory = "/var/home/zohar";
   home.stateVersion = "23.05"; # Please read the comment before changing.
@@ -17,6 +28,8 @@
     # Misc
     cachix
     fd
+    glab
+    neovim-gtk
     yadm
 
     # Fonts
@@ -29,7 +42,24 @@
     black
     pyright
     ruff
+
+    # Javascript
+    # nodejs_20
+    # tree-sitter
   ];
+
+  home.file.".config/doom/hm-custom.el" = {
+    enable = true;
+    text = with pkgs; ''
+      (setq-default
+        vterm-shell "~/.nix-profile/bin/fish"
+        lsp-clients-clangd-executable "${clang-tools}/bin/clangd"
+        lsp-cmake-server-command "${cmake-language-server}/bin/cmake-language-server"
+        lsp-nix-nixd-server-path "${nixd}/bin/nixd"
+        lsp-yaml-server-command '("${yaml-language-server}/bin/yaml-language-server" "--stdio")
+      )
+    '';
+  };
   
   fonts.fontconfig.enable = true;
 
@@ -38,6 +68,7 @@
 
   programs.git = {
     enable = true;
+    lfs.enable = true;
     ignores = [
       "/build"
       "/build-*"
@@ -57,8 +88,17 @@
 
   programs.jq.enable = true;
   programs.lsd.enable = true;
-  programs.neovim.enable = true;
-  programs.nix-index.enable = true;
+
+  programs.neovim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [ nvim-treesitter.withAllGrammars ];
+  };
+  # programs.nixvim = {
+    # enable = true;
+
+    # plugins.which-key.enable = true;
+  # };
+
   programs.ripgrep.enable = true;
   programs.zellij.enable = true;
 }
