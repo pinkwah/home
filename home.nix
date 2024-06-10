@@ -23,10 +23,9 @@ in
   };
 
   home.packages = with pkgs; [
-    (import (fetchTarball https://install.devenv.sh/latest)).default
-
     # Misc
     cachix
+    devenv
     fd
     glab
     neovim-gtk
