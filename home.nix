@@ -4,29 +4,31 @@ let
 
   emacs-config = with pkgs; ''
     ;; VTerm
-    (setq! vterm-shell "~/.nix-profile/bin/fish")
+    (setq! vterm-shell "~/.nix-profile/bin/fish"
+           lsp-enabled-clients '(
+             pyright
+             clangd
+             cmakels
+             nixd-lsp
+             yamlls
+             ts-ls
+            ))
 
     ;; Python
-    (appendq! lsp-enabled-clients 'pyright)
 
     ;; C/C++
-    (appendq! lsp-enabled-clients 'clangd)
     (setq! lsp-clients-clangd-executable "${clang-tools}/bin/clangd")
 
     ;; CMake
-    (appendq! lsp-enabled-clients 'cmakels)
     (setq! lsp-cmake-server-command "${lib.getExe cmake-language-server}")
 
     ;; Nix
-    (appendq! lsp-enabled-clients 'nixd-lsp)
     (setq! lsp-nix-nixd-server-path "${lib.getExe nixd}")
 
     ;; Yaml
-    (appendq! lsp-enabled-clients 'yamlls)
-    (setq! lsp-yaml-server-command '("${lib.getExe yaml-language-server}" "--stdio")
+    (setq! lsp-yaml-server-command '("${lib.getExe yaml-language-server}" "--stdio"))
 
     ;; Typescript
-    (appendq! lsp-enabled-clients 'ts-ls)
     (setq! lsp-clients-typescript-tls-path "${lib.getExe typescript-language-server}")
   '';
 
@@ -55,6 +57,9 @@ in {
 
     # Javascript
     typescript
+
+    # Ruby
+    ruby
 
     # Nix
     nixd
@@ -91,7 +96,7 @@ in {
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs29-pgtk;
+    # package = pkgs.emacs29-pgtk;
     extraPackages = epkgs: [ epkgs.vterm ];
   };
 
