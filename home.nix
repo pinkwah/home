@@ -1,26 +1,39 @@
 { config, pkgs, ... }:
 
 let
-  nixvim = import (builtins.fetchGit {
-    url = "https://github.com/nix-community/nixvim";
-  });
-in
-{
-  nixpkgs.config.allowUnfree = true;
 
-  imports = [
-    nixvim.homeManagerModules.nixvim
-  ];
+  emacs-config = with pkgs; ''
+    ;; VTerm
+    (setq! vterm-shell "~/.nix-profile/bin/fish")
 
-  home.username = "zohar";
-  home.homeDirectory = "/var/home/zohar";
+    ;; Python
+    (appendq! lsp-enabled-clients 'pyright)
+
+    ;; C/C++
+    (appendq! lsp-enabled-clients 'clangd)
+    (setq! lsp-clients-clangd-executable "${clang-tools}/bin/clangd")
+
+    ;; CMake
+    (appendq! lsp-enabled-clients 'cmakels)
+    (setq! lsp-cmake-server-command "${lib.getExe cmake-language-server}")
+
+    ;; Nix
+    (appendq! lsp-enabled-clients 'nixd-lsp)
+    (setq! lsp-nix-nixd-server-path "${lib.getExe nixd}")
+
+    ;; Yaml
+    (appendq! lsp-enabled-clients 'yamlls)
+    (setq! lsp-yaml-server-command '("${lib.getExe yaml-language-server}" "--stdio")
+
+    ;; Typescript
+    (appendq! lsp-enabled-clients 'ts-ls)
+    (setq! lsp-clients-typescript-tls-path "${lib.getExe typescript-language-server}")
+  '';
+
+in {
+  home.username = builtins.getEnv "USER";
+  home.homeDirectory = builtins.getEnv "HOME";
   home.stateVersion = "23.05"; # Please read the comment before changing.
-
-  home.file = {
-  };
-
-  home.sessionVariables = {
-  };
 
   home.packages = with pkgs; [
     # Misc
@@ -30,34 +43,31 @@ in
     glab
     neovim-gtk
     yadm
+    htop
+    btop
 
     # Fonts
     hasklig
+    (nerdfonts.override { fonts = ["NerdFontsSymbolsOnly"]; })
 
     # C / C++
-    clang-tools
+    clang-tools  # clangd
+
+    # Javascript
+    typescript
+
+    # Nix
+    nixd
 
     # Python
     black
     pyright
     ruff
-
-    # Javascript
-    # nodejs_20
-    # tree-sitter
   ];
 
   home.file.".config/doom/hm-custom.el" = {
     enable = true;
-    text = with pkgs; ''
-      (setq-default
-        vterm-shell "~/.nix-profile/bin/fish"
-        lsp-clients-clangd-executable "${clang-tools}/bin/clangd"
-        lsp-cmake-server-command "${cmake-language-server}/bin/cmake-language-server"
-        lsp-nix-nixd-server-path "${nixd}/bin/nixd"
-        lsp-yaml-server-command '("${yaml-language-server}/bin/yaml-language-server" "--stdio")
-      )
-    '';
+    text = emacs-config;
   };
   
   fonts.fontconfig.enable = true;
@@ -92,11 +102,6 @@ in
     enable = true;
     plugins = with pkgs.vimPlugins; [ nvim-treesitter.withAllGrammars ];
   };
-  # programs.nixvim = {
-    # enable = true;
-
-    # plugins.which-key.enable = true;
-  # };
 
   programs.ripgrep.enable = true;
   programs.zellij.enable = true;
