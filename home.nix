@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 let
 
@@ -20,6 +20,8 @@ let
              rust-analyzer
              ts-ls
              yamlls
+             ruby-lsp
+             rust-analyzer
             ))
 
     ;; Python
@@ -32,6 +34,10 @@ let
 
     ;; Nix
     (setq! lsp-nix-nixd-server-path "${lib.getExe nixd}")
+
+    ;; Rust
+    (setq! lsp-rust-server "${lib.getExe rust-analyzer}"
+           rustic-lsp-server "${lib.getExe rust-analyzer}")
 
     ;; Rust
     (setq! lsp-rust-server "${lib.getExe rust-analyzer}"
@@ -66,13 +72,17 @@ in {
     (nerdfonts.override { fonts = ["NerdFontsSymbolsOnly"]; })
 
     # C / C++
+    conan
+    meson
+    ninja
     clang-tools  # clangd
 
     # Javascript
+    nodejs
     typescript
 
     # Ruby
-    ruby
+    ruby_3_3
 
     # Nix
     nixd
