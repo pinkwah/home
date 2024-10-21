@@ -10,8 +10,9 @@ let
              clangd
              cmakels
              nixd-lsp
-             yamlls
+             rust-analyzer
              ts-ls
+             yamlls
             ))
 
     ;; Python
@@ -25,14 +26,19 @@ let
     ;; Nix
     (setq! lsp-nix-nixd-server-path "${lib.getExe nixd}")
 
-    ;; Yaml
-    (setq! lsp-yaml-server-command '("${lib.getExe yaml-language-server}" "--stdio"))
+    ;; Rust
+    (setq! lsp-rust-server "${lib.getExe rust-analyzer}"
+           rustic-lsp-server "${lib.getExe rust-analyzer}")
 
     ;; Typescript
     (setq! lsp-clients-typescript-tls-path "${lib.getExe typescript-language-server}")
+
+    ;; Yaml
+    (setq! lsp-yaml-server-command '("${lib.getExe yaml-language-server}" "--stdio"))
   '';
 
 in {
+  nixpkgs.config.allowUnfree = true;
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
   home.stateVersion = "23.05"; # Please read the comment before changing.
@@ -43,10 +49,8 @@ in {
     devenv
     fd
     glab
-    neovim-gtk
     yadm
     htop
-    btop
 
     # Fonts
     hasklig
@@ -66,8 +70,12 @@ in {
 
     # Python
     black
+    poetry
     pyright
     ruff
+
+    # Other
+    nodejs
   ];
 
   home.file.".config/doom/hm-custom.el" = {
