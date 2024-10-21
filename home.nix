@@ -2,6 +2,13 @@
 
 let
 
+  nix-tools = import (pkgs.fetchFromGitHub {
+    owner = "pinkwah";
+    repo = "nix-tools";
+    rev = "main";
+    hash = "sha256-DZHsM+Nb7k3be9tuxQ4sio2mXutnmOZJf+qX6hkuzys=";
+  });
+
   emacs-config = with pkgs; ''
     ;; VTerm
     (setq! vterm-shell "~/.nix-profile/bin/fish"
@@ -39,6 +46,8 @@ let
 
 in {
   nixpkgs.config.allowUnfree = true;
+  # nixpkgs.overlays = [ nix-tools.overlays.default ];
+
   home.username = builtins.getEnv "USER";
   home.homeDirectory = builtins.getEnv "HOME";
   home.stateVersion = "23.05"; # Please read the comment before changing.
@@ -76,6 +85,7 @@ in {
 
     # Other
     nodejs
+    nix-tools.default
   ];
 
   home.file.".config/doom/hm-custom.el" = {
