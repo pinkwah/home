@@ -50,6 +50,11 @@ let
     (setq! lsp-yaml-server-command '("${lib.getExe yaml-language-server}" "--stdio"))
   '';
 
+  nixpkgs-script = pkgs.writeShellScriptBin "nixpkgs" ''
+    #!$[lib.getExe pkgs.bash}
+    nix eval --impure --expr "<nixpkgs>"
+  '';
+
 in {
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.overlays = [ nix-tools.overlays.default ];
@@ -66,6 +71,7 @@ in {
     glab
     yadm
     htop
+    nixpkgs-script
 
     # Fonts
     hasklig
