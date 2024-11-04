@@ -56,11 +56,13 @@ let
   '';
 
 in {
+  imports = [
+    ./user.nix
+  ];
+
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.overlays = [ nix-tools.overlays.default ];
 
-  home.username = builtins.getEnv "USER";
-  home.homeDirectory = builtins.getEnv "HOME";
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
