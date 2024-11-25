@@ -103,7 +103,7 @@ in {
 
     # Other
     nodejs
-    nix-tools.default
+    # nix-tools.default
   ];
 
   home.file.".config/doom/hm-custom.el" = {

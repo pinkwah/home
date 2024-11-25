@@ -1,6 +1,8 @@
-{ ... }:
+{ lib, pkgs, ... }:
 
 {
   home.username = "zom";
   home.homeDirectory = "/private/zom";
+
+  programs.emacs.package = lib.mkForce pkgs.emacs;
 }
