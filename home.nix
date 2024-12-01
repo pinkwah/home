@@ -77,7 +77,7 @@ in {
 
     # Fonts
     hasklig
-    (nerdfonts.override { fonts = ["NerdFontsSymbolsOnly"]; })
+    nerd-fonts.symbols-only
 
     # C / C++
     conan
