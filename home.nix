@@ -9,19 +9,30 @@ let
     hash = "sha256-DZHsM+Nb7k3be9tuxQ4sio2mXutnmOZJf+qX6hkuzys=";
   });
 
+  use-default = pkg: exe: pkgs.writeScript "default-${exe}" ''
+    #!${lib.getExe pkgs.bash}
+    if command -v "${exe}" 2>&1 >/dev/null
+    then
+      exec "${exe}" "$@"
+    else
+      exec "${pkg}/bin/${exe}" "$@"
+    fi
+  '';
+
+  use-default' = pkg: use-default pkg (builtins.baseNameOf (lib.getExe pkg));
+
   emacs-config = with pkgs; ''
     ;; VTerm
     (setq! vterm-shell "~/.nix-profile/bin/fish"
            lsp-enabled-clients '(
-             pyright
              clangd
              cmakels
              nixd-lsp
+             pyright
              rust-analyzer
+             ruby-ls
              ts-ls
              yamlls
-             ruby-lsp
-             rust-analyzer
             ))
 
     ;; Python
@@ -35,9 +46,8 @@ let
     ;; Nix
     (setq! lsp-nix-nixd-server-path "${lib.getExe nixd}")
 
-    ;; Rust
-    (setq! lsp-rust-server "${lib.getExe rust-analyzer}"
-           rustic-lsp-server "${lib.getExe rust-analyzer}")
+    ;; Ruby
+    (setq! lsp-solargraph-server-command '("${use-default' solargraph}" "stdio"))
 
     ;; Rust
     (setq! lsp-rust-server "${lib.getExe rust-analyzer}"
@@ -78,6 +88,7 @@ in {
     # Fonts
     hasklig
     nerd-fonts.symbols-only
+    jetbrains-mono
 
     # C / C++
     conan
@@ -88,9 +99,6 @@ in {
     # Javascript
     nodejs
     typescript
-
-    # Ruby
-    ruby_3_3
 
     # Nix
     nixd
