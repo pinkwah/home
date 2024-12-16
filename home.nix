@@ -86,9 +86,11 @@ in {
     nixpkgs-script
 
     # Fonts
-    hasklig
+    corefonts
+    nerd-fonts.hasklug
+    nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
-    jetbrains-mono
+    vistafonts
 
     # C / C++
     conan
