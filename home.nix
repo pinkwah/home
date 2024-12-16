@@ -36,6 +36,7 @@ let
             ))
 
     ;; Python
+    (setq lsp-pyright-langserver-command "${lib.getExe basedpyright}")
 
     ;; C/C++
     (setq! lsp-clients-clangd-executable "${clang-tools}/bin/clangd")
