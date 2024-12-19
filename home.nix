@@ -40,12 +40,12 @@ let
              clangd
              cmakels
              crystalline
-             nixd-lsp
-             pyright
+             mesonlsp
              ruby-lsp-ls
-             rust-analyzer
              tailwindcss
+             rust-analyzer
              ts-ls
+             valals
              yamlls
             ))
 
@@ -73,6 +73,9 @@ let
     ;; Lisp
     (setq! parinfer-rust-library "${parinfer-rust-emacs}/lib/libparinfer_rust.so")
 
+    ;; Meson
+    (setq! lsp-meson-server-executable '("${lib.getExe mesonlsp}"))
+
     ;; Nix
     (setq! lsp-nix-nixd-server-path "${lib.getExe nixd}")
 
@@ -88,6 +91,9 @@ let
 
     ;; Typescript
     (setq! lsp-clients-typescript-tls-path "${lib.getExe typescript-language-server}")
+
+    ;; Vala
+    (setq! lsp-clients-vala-ls-executable "${lib.getExe vala-language-server}")
 
     ;; Yaml
     (setq! lsp-yaml-server-command '("${lib.getExe yaml-language-server}" "--stdio"))
