@@ -58,6 +58,9 @@ let
     (setq! lsp-rust-server "${lib.getExe rust-analyzer}"
            rustic-lsp-server "${lib.getExe rust-analyzer}")
 
+    ;; TailwindCSS
+    (setq! lsp-tailwindcss-server-path "${lib.getExe tailwindcss-language-server}")
+
     ;; Typescript
     (setq! lsp-clients-typescript-tls-path "${lib.getExe typescript-language-server}")
 
