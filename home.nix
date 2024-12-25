@@ -30,14 +30,16 @@ let
              crystalline
              nixd-lsp
              pyright
-             ruby-ls
+             ruby-lsp-ls
              rust-analyzer
+             tailwindcss
              ts-ls
              yamlls
             ))
 
     ;; Python
-    (setq lsp-pyright-langserver-command "${lib.getExe basedpyright}")
+    (setq lsp-pyright-langserver-command "${lib.getExe basedpyright}"
+          dap-python-debugger 'debugpy)
 
     ;; C/C++
     (setq! lsp-clients-clangd-executable "${clang-tools}/bin/clangd")
@@ -47,6 +49,9 @@ let
 
     ;; Crystal
     (setq! lsp-clients-crystal-executable '("${lib.getExe crystalline}" "--stdio"))
+
+    ;; Lisp
+    (setq! parinfer-rust-library "${parinfer-rust-emacs}/lib/libparinfer_rust.so")
 
     ;; Nix
     (setq! lsp-nix-nixd-server-path "${lib.getExe nixd}")
