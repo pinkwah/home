@@ -27,10 +27,11 @@ let
            lsp-enabled-clients '(
              clangd
              cmakels
+             crystalline
              nixd-lsp
              pyright
-             rust-analyzer
              ruby-ls
+             rust-analyzer
              ts-ls
              yamlls
             ))
@@ -43,6 +44,9 @@ let
 
     ;; CMake
     (setq! lsp-cmake-server-command "${lib.getExe cmake-language-server}")
+
+    ;; Crystal
+    (setq! lsp-clients-crystal-executable '("${lib.getExe crystalline}" "--stdio"))
 
     ;; Nix
     (setq! lsp-nix-nixd-server-path "${lib.getExe nixd}")
