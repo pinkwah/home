@@ -91,7 +91,9 @@ in {
     nerd-fonts.hasklug
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
+    corefonts
     vistafonts
+    jetbrains-mono
 
     # C / C++
     conan
