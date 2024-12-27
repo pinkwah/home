@@ -9,6 +9,17 @@ let
     hash = "sha256-DZHsM+Nb7k3be9tuxQ4sio2mXutnmOZJf+qX6hkuzys=";
   });
 
+  tree-sitter-astro = pkgs.tree-sitter.buildGrammar {
+    language = "astro";
+    version = "0.1.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "virchau13";
+      repo = "tree-sitter-astro";
+      rev = "6e3bad36a8c12d579e73ed4f05676141a4ccf68d";
+      hash = "sha256-ZsItSpYeSPnHn4avpHS54P4J069X9cW8VCRTM9Gfefg=";
+    };
+  };
+
   use-default = pkg: exe: pkgs.writeScript "default-${exe}" ''
     #!${lib.getExe pkgs.bash}
     if command -v "${exe}" 2>&1 >/dev/null
@@ -25,6 +36,7 @@ let
     ;; VTerm
     (setq! vterm-shell "~/.nix-profile/bin/fish"
            lsp-enabled-clients '(
+             astro-ls
              clangd
              cmakels
              crystalline
@@ -84,7 +96,14 @@ in {
   ];
 
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.overlays = [ nix-tools.overlays.default ];
+  nixpkgs.overlays = [
+    # nix-tools.overlays.default
+    (final: prev: {
+      tree-sitter = prev.tree-sitter.override {
+        extraGrammars = { inherit tree-sitter-astro; };
+      }; 
+    })
+  ];
 
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
@@ -96,10 +115,10 @@ in {
     glab
     yadm
     htop
+    tmux
     nixpkgs-script
 
     # Fonts
-    corefonts
     nerd-fonts.hasklug
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
@@ -111,24 +130,19 @@ in {
     conan
     meson
     ninja
-    clang-tools  # clangd
 
     # Javascript
-    nodejs
-    typescript
-
-    # Nix
-    nixd
+    astro-language-server
+    typescript-language-server
 
     # Python
     black
     poetry
-    pyright
     ruff
 
     # Other
-    nodejs
     # nix-tools.default
+    emacsPackages.tree-sitter-langs
   ];
 
   home.file.".config/doom/hm-custom.el" = {
@@ -158,7 +172,11 @@ in {
   programs.emacs = {
     enable = true;
     package = pkgs.emacs29-pgtk;
-    extraPackages = epkgs: [ epkgs.vterm ];
+    extraPackages = epkgs: with epkgs; [
+      tree-sitter
+      tree-sitter-langs
+      vterm
+    ];
   };
 
   programs.jq.enable = true;
