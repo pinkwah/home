@@ -122,6 +122,7 @@ in {
     nerd-fonts.hasklug
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
+    noto-fonts-emoji
     corefonts
     vistafonts
     jetbrains-mono
