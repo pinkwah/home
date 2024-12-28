@@ -36,7 +36,7 @@ let
     ;; VTerm
     (setq! vterm-shell "~/.nix-profile/bin/fish"
            lsp-enabled-clients '(
-             astro-ls
+             my-astro-ls
              clangd
              cmakels
              crystalline
@@ -48,6 +48,14 @@ let
              ts-ls
              yamlls
             ))
+
+    ;; Astro
+    (after! lsp-mode
+      (lsp-register-client
+        (make-lsp-client :new-connection (lsp-stdio-connection '("${astro-language-server}/bin/astro-ls" "--stdio"))
+                         :activation-fn (lsp-activate-on "astro")
+                         :initialization-options '(:typescript (:tsdk "${typescript}/lib/node_modules/typescript/lib"))
+                         :server-id 'my-astro-ls)))
 
     ;; Python
     (setq lsp-pyright-langserver-command "${lib.getExe basedpyright}"
@@ -132,10 +140,6 @@ in {
     meson
     ninja
 
-    # Javascript
-    astro-language-server
-    typescript-language-server
-
     # Python
     black
     poetry
@@ -143,7 +147,6 @@ in {
 
     # Other
     # nix-tools.default
-    emacsPackages.tree-sitter-langs
   ];
 
   home.file.".config/doom/hm-custom.el" = {
