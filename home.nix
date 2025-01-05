@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 let
 
@@ -90,7 +90,8 @@ let
     (setq! lsp-tailwindcss-server-path "${lib.getExe tailwindcss-language-server}")
 
     ;; Typescript
-    (setq! lsp-clients-typescript-tls-path "${lib.getExe typescript-language-server}")
+    (setq! lsp-clients-typescript-tls-path "${lib.getExe typescript-language-server}"
+           lsp-typescript-tsdk "${typescript}/lib/node_modules/typescript")
 
     ;; Vala
     (setq! lsp-clients-vala-ls-executable "${lib.getExe vala-language-server}")
@@ -151,6 +152,9 @@ in {
     poetry
     ruff
 
+    # Typescript
+    typescript
+
     # Other
     # nix-tools.default
   ];
@@ -195,8 +199,11 @@ in {
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [ nvim-treesitter.withAllGrammars ];
+    viAlias = true;
+    vimAlias = true;
   };
 
+  programs.nix-index-database.comma.enable = true;
   programs.ripgrep.enable = true;
   programs.zellij.enable = true;
 }
