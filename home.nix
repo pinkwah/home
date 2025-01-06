@@ -30,6 +30,8 @@ let
     fi
   '';
 
+  soSuffix = if pkgs.stdenv.isDarwin then "dylib" else "so";
+
   use-default' = pkg: use-default pkg (builtins.baseNameOf (lib.getExe pkg));
 
   emacs-config = with pkgs; ''
@@ -71,10 +73,10 @@ let
     (setq! lsp-clients-crystal-executable '("${lib.getExe crystalline}" "--stdio"))
 
     ;; Lisp
-    (setq! parinfer-rust-library "${parinfer-rust-emacs}/lib/libparinfer_rust.so")
+    (setq! parinfer-rust-library "${parinfer-rust-emacs}/lib/libparinfer_rust.${soSuffix}")
 
     ;; Meson
-    (setq! lsp-meson-server-executable '("${lib.getExe mesonlsp}"))
+    (setq! lsp-meson-server-executable '("${if stdenv.isDarwin then "" else lib.getExe mesonlsp}"))
 
     ;; Nix
     (setq! lsp-nix-nixd-server-path "${lib.getExe nixd}")

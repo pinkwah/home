@@ -15,12 +15,9 @@
   };
 
   outputs = { nixpkgs, home-manager, nix-index-database, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      homeConfigurations."zohar" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+    {
+      homeConfigurations.${builtins.getEnv "USER"} = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {};
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
