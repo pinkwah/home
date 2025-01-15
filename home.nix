@@ -45,6 +45,7 @@ let
              mesonlsp
              ruby-lsp-ls
              tailwindcss
+             pyright
              rust-analyzer
              ts-ls
              valals
@@ -134,6 +135,9 @@ in {
     htop
     tmux
     nixpkgs-script
+
+    # Azure
+    azure-cli
 
     # Fonts
     nerd-fonts.hasklug
