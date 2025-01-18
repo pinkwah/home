@@ -14,7 +14,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nix-index-database, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, nix-index-database, ... }:
     {
       homeConfigurations.${builtins.getEnv "USER"} = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {};
@@ -25,6 +25,7 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
+        extraSpecialArgs = { inherit inputs; };
       };
     };
 }
