@@ -15,6 +15,23 @@ let
     fi
   '';
 
+  allGrammars =
+    let
+      grammars = lib.filterAttrs (k: v: lib.isDerivation v) pkgs.tree-sitter-grammars;
+      names = lib.concatStringsSep " " (lib.attrNames grammars);
+      paths = lib.concatStringsSep " " (lib.attrValues grammars);
+    in pkgs.runCommand "emacs-tree-sitter-grammars" {
+        inherit names paths;
+      } ''
+      mkdir -p $out/lib
+      n=($names)
+      p=($paths)
+      l=''${#p[@]}
+      for ((i=0;i<$l;i++)); do
+        ln -s "''${p[$i]}/parser" "$out/lib/lib''${n[$i]}.so"
+      done
+    '';
+
   emacsConfig = with pkgs; ''
     ;; VTerm
     (setq! vterm-shell "~/.nix-profile/bin/fish"
@@ -100,6 +117,7 @@ in
       tree-sitter
       tree-sitter-langs
       vterm
+      allGrammars
     ];
   };
 }

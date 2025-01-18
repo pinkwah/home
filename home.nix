@@ -21,8 +21,8 @@ in {
   nixpkgs.overlays = [
     (final: prev: {
       tree-sitter = prev.tree-sitter.override {
-        extraGrammars = prev.callPackage ./tree-sitter-grammars.nix {};
-      }; 
+        extraGrammars = import ./tree-sitter-grammars.nix { inherit (prev) lib fetchFromGitHub tree-sitter; };
+      };
     })
   ];
 
