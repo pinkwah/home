@@ -47,6 +47,7 @@ let
              ts-ls
              valals
              yamlls
+             pyright
             ))
 
     ;; Astro
