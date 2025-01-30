@@ -15,13 +15,22 @@
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nix-index-database, ... }:
-    {
-      homeConfigurations.${builtins.getEnv "USER"} = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {};
+    let
+      os = import ./os.nix;
+    in {
+      homeConfigurations.${os.name} = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs { inherit (os) system; };
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ nix-index-database.hmModules.nix-index ./home.nix ];
+        modules = [
+          nix-index-database.hmModules.nix-index
+	  ./home.nix
+	  {
+	    home.username = os.name;
+	    home.homeDirectory = os.home;
+	  }
+	];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix

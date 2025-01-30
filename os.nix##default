@@ -1,0 +1,5 @@
+{
+  name = "zohar";
+  home = "/var/home/zohar";
+  system = "x86_64-linux";
+}

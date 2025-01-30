@@ -1,0 +1,5 @@
+{
+  name = "zom";
+  home = "/private/zom";
+  system = "x86_64-linux";
+}
