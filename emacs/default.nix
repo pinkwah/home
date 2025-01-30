@@ -36,18 +36,19 @@ let
     ;; VTerm
     (setq! vterm-shell "~/.nix-profile/bin/fish"
            lsp-enabled-clients '(
-             my-astro-ls
              clangd
              cmakels
              crystalline
+             iph
              mesonlsp
+             my-astro-ls
+             pyright
              ruby-lsp-ls
-             tailwindcss
              rust-analyzer
+             tailwindcss
              ts-ls
              valals
              yamlls
-             pyright
             ))
 
     ;; Astro
@@ -81,6 +82,9 @@ let
 
     ;; Nix
     (setq! lsp-nix-nixd-server-path "${lib.getExe nixd}")
+
+    ;; PHP
+    (setq! lsp-intelephense-server-command '("${lib.getExe intelephense}" "--stdio"))
 
     ;; Ruby
     (setq! lsp-solargraph-server-command '("${use-default' solargraph}" "stdio"))
