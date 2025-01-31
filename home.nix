@@ -36,6 +36,7 @@ in {
     glab
     yadm
     htop
+    btop
     tmux
     nixpkgsScript
 
