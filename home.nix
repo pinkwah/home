@@ -71,6 +71,8 @@ in {
   programs.fish.enable = true;
   programs.gh.enable = true;
 
+  programs.gpg.enable = true;
+
   programs.git = {
     enable = true;
     lfs.enable = true;
