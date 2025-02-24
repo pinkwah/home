@@ -92,5 +92,4 @@ in {
 
   programs.nix-index-database.comma.enable = true;
   programs.ripgrep.enable = true;
-  programs.zellij.enable = true;
 }
