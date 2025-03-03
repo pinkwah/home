@@ -8,13 +8,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nix-index-database, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, ... }:
     let
       os = import ./os.nix;
     in {
@@ -24,7 +28,8 @@
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
         modules = [
-          nix-index-database.hmModules.nix-index
+          inputs.mac-app-util.homeManagerModules.default
+          inputs.nix-index-database.hmModules.nix-index
 	  ./home.nix
 	  {
 	    home.username = os.name;
