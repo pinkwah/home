@@ -2,4 +2,7 @@
   name = "ZOM";
   home = "/Users/ZOM";
   system = "aarch64-darwin";
+  module = { ... }: {
+    programs.gpg.enable = true;
+  };
 }

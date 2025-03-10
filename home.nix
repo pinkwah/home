@@ -13,7 +13,6 @@ let
 
 in {
   imports = [
-    ./user.nix
     ./emacs
   ];
 

@@ -30,12 +30,13 @@
         modules = [
           inputs.mac-app-util.homeManagerModules.default
           inputs.nix-index-database.hmModules.nix-index
-	  ./home.nix
-	  {
-	    home.username = os.name;
-	    home.homeDirectory = os.home;
-	  }
-	];
+          ./home.nix
+          os.module
+          {
+            home.username = os.name;
+            home.homeDirectory = os.home;
+          }
+        ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
