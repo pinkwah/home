@@ -32,6 +32,11 @@ let
       done
     '';
 
+  rubyEnv = pkgs.bundlerEnv {
+    name = "emacs-ruby-env";
+    gemdir = ./.;
+  };
+
   emacsConfig = with pkgs; ''
     ;; VTerm
     (setq! vterm-shell "~/.nix-profile/bin/fish"
@@ -43,7 +48,8 @@ let
              mesonlsp
              my-astro-ls
              pyright
-             ruby-lsp-ls
+             ;; ruby-lsp-ls
+             ruby-ls
              rust-analyzer
              tailwindcss
              ts-ls
@@ -87,7 +93,7 @@ let
     (setq! lsp-intelephense-server-command '("${lib.getExe intelephense}" "--stdio"))
 
     ;; Ruby
-    (setq! lsp-solargraph-server-command '("${use-default' solargraph}" "stdio"))
+    (setq! lsp-solargraph-server-command '("${use-default rubyEnv "solargraph"}" "stdio"))
 
     ;; Rust
     (setq! lsp-rust-server "${lib.getExe rust-analyzer}"

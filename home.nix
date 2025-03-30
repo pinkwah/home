@@ -62,7 +62,7 @@ in {
     ruff
 
     # Ruby
-    ruby
+    (ruby.withPackages (gs: with gs; [ sorbet-runtime ]))
 
     # Typescript
     typescript
