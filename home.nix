@@ -61,6 +61,9 @@ in {
     poetry
     ruff
 
+    # Ruby
+    ruby
+
     # Typescript
     typescript
   ];
