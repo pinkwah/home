@@ -37,6 +37,8 @@ let
     gemdir = ./.;
   };
 
+  crystalline = pkgs.callPackage ./crystalline.nix {};
+
   emacsConfig = with pkgs; ''
     ;; VTerm
     (setq! vterm-shell "~/.nix-profile/bin/fish"
@@ -45,11 +47,12 @@ let
              cmakels
              crystalline
              iph
+             kotlin-ls
              mesonlsp
              my-astro-ls
              pyright
-             ;; ruby-lsp-ls
-             ruby-ls
+             ruby-lsp-ls
+             ;; ruby-ls
              rust-analyzer
              tailwindcss
              ts-ls
@@ -80,6 +83,10 @@ let
     ;; Crystal
     (setq! lsp-clients-crystal-executable '("${lib.getExe crystalline}" "--stdio"))
 
+    ;; Kotlin
+    (setq! lsp-clients-kotlin-server-executable "${kotlin-language-server}/bin/kotlin-language-server"
+           lsp-kotlin-language-server-path "${kotlin-language-server}/bin/kotlin-language-server")
+
     ;; Lisp
     (setq! parinfer-rust-library "${parinfer-rust-emacs}/lib/libparinfer_rust.${soSuffix}")
 
@@ -93,7 +100,7 @@ let
     (setq! lsp-intelephense-server-command '("${lib.getExe intelephense}" "--stdio"))
 
     ;; Ruby
-    (setq! lsp-solargraph-server-command '("${use-default rubyEnv "solargraph"}" "stdio"))
+    ;; (setq! lsp-solargraph-server-command '("${use-default rubyEnv "solargraph"}" "stdio"))
 
     ;; Rust
     (setq! lsp-rust-server "${lib.getExe rust-analyzer}"

@@ -38,6 +38,7 @@ in {
     btop
     tmux
     nixpkgsScript
+    dos2unix
 
     # Azure
     azure-cli
@@ -45,6 +46,7 @@ in {
     # Fonts
     nerd-fonts.hasklug
     nerd-fonts.jetbrains-mono
+    nerd-fonts.blex-mono
     nerd-fonts.symbols-only
     noto-fonts-emoji
     corefonts
