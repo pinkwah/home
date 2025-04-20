@@ -34,8 +34,6 @@ let
 
   crystalline = pkgs.callPackage ../pkgs/crystalline {};
 
-  crystalline = pkgs.callPackage ./crystalline.nix {};
-
   emacsConfig = with pkgs; ''
     ;; VTerm
     (setq! vterm-shell "~/.nix-profile/bin/fish"
