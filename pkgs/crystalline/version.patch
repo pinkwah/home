@@ -1,0 +1,14 @@
+diff --git a/src/crystalline/main.cr b/src/crystalline/main.cr
+index 2537f9b..ba65b21 100644
+--- a/src/crystalline/main.cr
++++ b/src/crystalline/main.cr
+@@ -4,8 +4,7 @@ require "./ext/*"
+ require "./*"
+ 
+ module Crystalline
+-  VERSION = {{ (`shards version #{__DIR__}`.strip + "+" +
+-                system("git rev-parse --short HEAD || echo unknown").stringify).stringify.strip }}
++  VERSION = "0.16.0"
+   # Supported server capabilities.
+   SERVER_CAPABILITIES = LSP::ServerCapabilities.new(
+     text_document_sync: LSP::TextDocumentSyncKind::Incremental,

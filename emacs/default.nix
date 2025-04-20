@@ -32,10 +32,7 @@ let
       done
     '';
 
-  rubyEnv = pkgs.bundlerEnv {
-    name = "emacs-ruby-env";
-    gemdir = ./.;
-  };
+  crystalline = pkgs.callPackage ../pkgs/crystalline {};
 
   crystalline = pkgs.callPackage ./crystalline.nix {};
 
@@ -98,9 +95,6 @@ let
 
     ;; PHP
     (setq! lsp-intelephense-server-command '("${lib.getExe intelephense}" "--stdio"))
-
-    ;; Ruby
-    ;; (setq! lsp-solargraph-server-command '("${use-default rubyEnv "solargraph"}" "stdio"))
 
     ;; Rust
     (setq! lsp-rust-server "${lib.getExe rust-analyzer}"
