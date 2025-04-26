@@ -2,7 +2,8 @@
   name = "ZOM";
   home = "/Users/ZOM";
   system = "aarch64-darwin";
-  module = { ... }: {
+  module = { lib, pkgs, ... }: {
     programs.gpg.enable = true;
+    programs.emacs.package = lib.mkForce (pkgs.emacs30.override { withNativeCompilation = false; });
   };
 }

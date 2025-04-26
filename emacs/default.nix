@@ -35,26 +35,6 @@ let
   crystalline = pkgs.callPackage ../pkgs/crystalline {};
 
   emacsConfig = with pkgs; ''
-    ;; VTerm
-    (setq! vterm-shell "~/.nix-profile/bin/fish"
-           lsp-enabled-clients '(
-             clangd
-             cmakels
-             crystalline
-             iph
-             kotlin-ls
-             mesonlsp
-             my-astro-ls
-             pyright
-             ruby-lsp-ls
-             ;; ruby-ls
-             rust-analyzer
-             tailwindcss
-             ts-ls
-             valals
-             yamlls
-            ))
-
     ;; Astro
     (after! lsp-mode
       (lsp-register-client
@@ -65,52 +45,57 @@ let
           :activation-fn (lsp-activate-on "astro")
           :initialization-options '(:typescript (:tsdk "${typescript}/lib/node_modules/typescript/lib")))))
 
-    ;; Python
-    (setq lsp-pyright-langserver-command "${lib.getExe basedpyright}"
-          dap-python-debugger 'debugpy)
-
-    ;; C/C++
-    (setq! lsp-clients-clangd-executable "${clang-tools}/bin/clangd")
-
-    ;; CMake
-    (setq! lsp-cmake-server-command "${lib.getExe cmake-language-server}")
-
-    ;; Crystal
-    (setq! lsp-clients-crystal-executable '("${lib.getExe crystalline}" "--stdio"))
-
-    ;; Kotlin
-    (setq! lsp-clients-kotlin-server-executable "${kotlin-language-server}/bin/kotlin-language-server"
-           lsp-kotlin-language-server-path "${kotlin-language-server}/bin/kotlin-language-server")
-
     ;; Lisp
     (setq! parinfer-rust-library "${parinfer-rust-emacs}/lib/libparinfer_rust.${soSuffix}")
 
     ;; Meson
     (setq! lsp-meson-server-executable '("${if stdenv.isDarwin then "" else lib.getExe mesonlsp}"))
 
-    ;; Nix
-    (setq! lsp-nix-nixd-server-path "${lib.getExe nixd}")
-
-    ;; PHP
-    (setq! lsp-intelephense-server-command '("${lib.getExe intelephense}" "--stdio"))
-
-    ;; Rust
-    (setq! lsp-rust-server "${lib.getExe rust-analyzer}"
-           rustic-lsp-server "${lib.getExe rust-analyzer}")
-
-    ;; TailwindCSS
-    (setq! lsp-tailwindcss-server-path "${lib.getExe tailwindcss-language-server}")
-
-    ;; Typescript
-    (setq! lsp-clients-typescript-tls-path "${lib.getExe typescript-language-server}"
-           lsp-typescript-tsdk "${typescript}/lib/node_modules/typescript")
-
-    ;; Vala
-    (setq! lsp-clients-vala-ls-executable "${lib.getExe vala-language-server}")
-
-    ;; Yaml
-    (setq! lsp-yaml-server-command '("${lib.getExe yaml-language-server}" "--stdio"))
+    ;; Setup PATH
+    (add-to-list 'exec-path (concat (xdg-data-home) "/emacs-lsps/bin"))
+    (setenv "PATH" (mapconcat 'identity exec-path ":"))
   '';
+
+  lsps = with pkgs; {
+    inherit (pkgs)
+      pyright
+      cmake-language-server
+      crystalline
+      kotlin-language-server
+      nixd
+      intelephense
+      rust-analyzer
+      tailwindcss-language-server
+      typescript
+      typescript-language-server
+      vala-language-server
+      yaml-language-server;
+
+    # pyright = basedpyright;
+    clangd = clang-tools;
+  };
+
+  lspsEnv = pkgs.buildEnv {
+    name = "lsps-env";
+    paths = lib.attrValues lsps;
+  };
+
+  # lspsEnv = pkgs.runCommand "lsps-env" {
+    # paths = builtins.toJSON (lib.mapAttrs (k: v: lib.getExe v) lsps);
+# 
+    # script = ''
+    # import os
+    # import json
+    # # from pathlib import Path
+# # 
+    # out = Path(os.environ["out"])
+    # (out / "bin").mkdir(parents=True)
+    # for name, path in json.loads(os.environ["paths"]).items():
+        # (out / "bin" / name).symlink_to(path)
+    # '';
+  # } ''
+    # echo "$script" | ${pkgs.python3}/bin/python3
+  # '';
 
 in
 
@@ -118,6 +103,11 @@ in
   home.file.".config/doom/hm-custom.el" = {
     enable = true;
     text = emacsConfig;
+  };
+
+  home.file.".local/share/emacs-lsps" = {
+    enable = true;
+    source = lspsEnv;
   };
 
   programs.emacs = {
