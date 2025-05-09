@@ -27,6 +27,12 @@
       inherit (nixpkgs) lib;
 
       profiles = {
+        zohar = {
+          system = "x86_64-linux";
+          username = "zohar";
+          homeDirectory = "/var/home/zohar";
+        };
+
         ZOM = {
           system = "aarch64-darwin";
           username = "ZOM";
