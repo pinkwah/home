@@ -21,8 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font "JetBrainsMono NFM-14"
-      doom-emoji-font "Noto Color Emoji")
+(setq doom-font "JetBrainsMono NFM-16"
+      doom-emoji-font "Apple Color Emoji")
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -136,6 +136,3 @@
 (add-hook! 'c-ts-mode #'lsp! 'append)
 
 (setq! lsp-enable-suggest-server-download nil)
-
-(load! "./hm-custom.el")
-(load! "./os.el")

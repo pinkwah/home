@@ -16,31 +16,38 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    doom-emacs = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "";
+    };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }:
     let
-      os = import ./os.nix;
-    in {
-      homeConfigurations.${os.name} = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs { inherit (os) system; };
+      inherit (nixpkgs) lib;
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [
-          inputs.mac-app-util.homeManagerModules.default
-          inputs.nix-index-database.hmModules.nix-index
-          ./home.nix
-          os.module
-          {
-            home.username = os.name;
-            home.homeDirectory = os.home;
-          }
-        ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
-        extraSpecialArgs = { inherit inputs; };
+      profiles = {
+        ZOM = {
+          system = "aarch64-darwin";
+          username = "ZOM";
+          homeDirectory = "/Users/ZOM";
+          modules = [ inputs.mac-app-util.homeManagerModules.default ./profiles/work-managed-macos.nix ];
+        };
       };
+
+      mkHome = { system, username, homeDirectory, modules ? [] }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs { inherit system; };
+          modules = modules ++ [
+            inputs.nix-index-database.hmModules.nix-index
+            inputs.doom-emacs.homeModule
+            ./home.nix
+            { home = { inherit username homeDirectory; }; }
+          ];
+          extraSpecialArgs = { inherit inputs; };
+        };
+
+    in {
+      homeConfigurations = lib.mapAttrs (_: mkHome) profiles;
     };
 }

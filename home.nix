@@ -12,10 +12,6 @@ let
   nixpkgsScript = pkgs.callPackage ./nixpkgs-script.nix { inherit inputs; };
 
 in {
-  imports = [
-    ./emacs
-  ];
-
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
     (final: prev: {
@@ -40,9 +36,6 @@ in {
     nixpkgsScript
     dos2unix
 
-    # Azure
-    azure-cli
-
     # Fonts
     nerd-fonts.hasklug
     nerd-fonts.jetbrains-mono
@@ -62,9 +55,13 @@ in {
     black
     poetry
     ruff
+    uv
 
-    # Ruby
-    (ruby.withPackages (gs: with gs; [ sorbet-runtime ]))
+      nil
+      pyright
+      yaml-language-server
+      clang-tools
+      rust-analyzer
 
     # Typescript
     typescript
@@ -87,11 +84,26 @@ in {
   };
 
   programs.direnv.enable = true;
-  programs.home-manager.enable = true;
+
+  programs.home-manager = {
+    enable = true;
+  };
 
   programs.jq.enable = true;
   programs.lsd.enable = true;
 
   programs.nix-index-database.comma.enable = true;
   programs.ripgrep.enable = true;
+
+  programs.doom-emacs = {
+    enable = true;
+    emacs = pkgs.emacs30-pgtk;
+    doomDir = ./doom;
+
+    extraPackages = epkgs: with epkgs; [
+      treesit-grammars.with-all-grammars
+    ];
+  };
+
+  programs.vim.enable = true;
 }
