@@ -1,0 +1,2 @@
+(setq doom-font "JetBrainsMono NFM-16"
+      doom-emoji-font "Apple Color Emoji")
