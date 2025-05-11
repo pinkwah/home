@@ -1,8 +1,0 @@
-{
-  name = "zom";
-  home = "/private/zom";
-  system = "x86_64-linux";
-  module = { lib, pkgs, ... }: {
-    programs.emacs.package = lib.mkForce pkgs.emacs30;
-  };
-}

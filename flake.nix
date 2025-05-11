@@ -27,18 +27,26 @@
       inherit (nixpkgs) lib;
 
       profiles = {
-        zohar = {
+        personal = {
           system = "x86_64-linux";
           username = "zohar";
           homeDirectory = "/var/home/zohar";
+          modules = [ ./profiles/personal.nix ];
         };
 
-        ZOM = {
+        work-managed-macos = {
           system = "aarch64-darwin";
           username = "ZOM";
           homeDirectory = "/Users/ZOM";
           modules = [ inputs.mac-app-util.homeManagerModules.default ./profiles/work-managed-macos.nix ];
         };
+      };
+
+      configs = with profiles; {
+        zohar = personal;
+        "zohar@EquinorUMPC" = work-unmanaged-linux;
+        ZOM = work-managed-macos;
+        zom = work-managed-linux;
       };
 
       mkHome = { system, username, homeDirectory, modules ? [] }:
@@ -54,6 +62,6 @@
         };
 
     in {
-      homeConfigurations = lib.mapAttrs (_: mkHome) profiles;
+      homeConfigurations = lib.mapAttrs (_: mkHome) configs;
     };
 }

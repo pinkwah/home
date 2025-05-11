@@ -25,6 +25,7 @@ in {
 
   home.packages = with pkgs; [
     # Misc
+    attic-client
     cachix
     devenv
     fd
@@ -66,44 +67,4 @@ in {
     # Typescript
     typescript
   ];
-
-  fonts.fontconfig.enable = true;
-
-  programs.fish.enable = true;
-  programs.gh.enable = true;
-
-  programs.git = {
-    enable = true;
-    lfs.enable = true;
-    ignores = [
-      "/build"
-      "/build-*"
-      "/venv"
-      "/venv-*"
-    ];
-  };
-
-  programs.direnv.enable = true;
-
-  programs.home-manager = {
-    enable = true;
-  };
-
-  programs.jq.enable = true;
-  programs.lsd.enable = true;
-
-  programs.nix-index-database.comma.enable = true;
-  programs.ripgrep.enable = true;
-
-  programs.doom-emacs = {
-    enable = true;
-    emacs = pkgs.emacs30-pgtk;
-    doomDir = ./doom;
-
-    extraPackages = epkgs: with epkgs; [
-      treesit-grammars.with-all-grammars
-    ];
-  };
-
-  programs.vim.enable = true;
 }
