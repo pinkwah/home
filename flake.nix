@@ -26,12 +26,23 @@
     let
       inherit (nixpkgs) lib;
 
-      profiles = {
+      profiles = rec {
         personal = {
           system = "x86_64-linux";
           username = "zohar";
           homeDirectory = "/var/home/zohar";
           modules = [ ./profiles/personal.nix ];
+        };
+
+        work-unmanaged-linux = personal // {
+          modules = [ ./profiles/work-unmanaged-linux.nix ];
+        };
+
+        work-managed-linux = {
+          system = "x86_64-linux";
+          username = "zom";
+          homeDirectory = "/private/zom";
+          modules = [ ./profiles/work-managed-linux.nix ];
         };
 
         work-managed-macos = {
@@ -44,7 +55,7 @@
 
       configs = with profiles; {
         zohar = personal;
-        "zohar@EquinorUMPC" = work-unmanaged-linux;
+        "zohar@ZOM-EquinorUMPC" = work-unmanaged-linux;
         ZOM = work-managed-macos;
         zom = work-managed-linux;
       };
