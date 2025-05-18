@@ -11,4 +11,8 @@
   };
 
   programs.rbenv.enable = true;
+
+  home.packages = with pkgs; [
+    ruby-lsp
+  ];
 }

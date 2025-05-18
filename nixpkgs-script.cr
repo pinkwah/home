@@ -22,6 +22,8 @@ when "repl", "r"
   Process.exec "nix", ["repl", "-f", src, *ARGV]
 when "build", "b"
   Process.exec "nix", ["build", "-f", src, *ARGV]
+when "eval", "e"
+  Process.exec "nix", ["eval", "-f", src, "--json", *ARGV]
 else
   usage
 end

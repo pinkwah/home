@@ -58,11 +58,14 @@ in {
     ruff
     uv
 
-      nil
-      pyright
-      yaml-language-server
-      clang-tools
-      rust-analyzer
+    # Language Server Protocol(s)
+    clang-tools                  # C/C++
+    nil                          # Nix
+    pyright                      # Python
+    rust-analyzer                # Rust
+    yaml-language-server         # YAML
+    vscode-langservers-extracted # CSS, EsLint, HTML, JSON, Markdown
+    typescript-language-server   # {Java,Type}script
 
     # Typescript
     typescript
