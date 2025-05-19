@@ -10,5 +10,5 @@
     signing.signByDefault = false;
   };
 
-  home.packages = with pkgs; [ azure-cli ];
+  home.packages = with pkgs; [ (azure-cli.withExtensions [azure-cli-extensions.application-insights]) ];
 }
