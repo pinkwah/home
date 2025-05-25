@@ -178,3 +178,17 @@
 (add-hook! 'yaml-ts-mode-hook #'lsp! 'append)
 
 (setq! lsp-enable-suggest-server-download nil)
+
+(use-package! lsp-tailwindcss
+  :after lsp-mode
+  :init
+  (setq! lsp-tailwindcss-add-on-mode t
+         lsp-tailwindcss-skip-config-check t
+	 lsp-tailwindcss-server-version "0.14.8"
+         lsp-tailwindcss-server-command "tailwindcss-language-server"))
+
+;;;###autoload
+(defun doom/find-file-in-private-config ()
+  "Search for a file in `doom-user-dir'."
+  (interactive)
+  (doom-project-find-file (expand-file-name "~/.config/home-manager/doom")))

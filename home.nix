@@ -18,6 +18,8 @@ in {
       tree-sitter = prev.tree-sitter.override {
         extraGrammars = import ./tree-sitter-grammars.nix { inherit (prev) lib fetchFromGitHub tree-sitter; };
       };
+
+      tailwindcss-language-server = prev.callPackage ./pkgs/tailwindcss-language-server {};
     })
   ];
 
@@ -66,6 +68,7 @@ in {
     yaml-language-server         # YAML
     vscode-langservers-extracted # CSS, EsLint, HTML, JSON, Markdown
     typescript-language-server   # {Java,Type}script
+    tailwindcss-language-server  # TailwindCSS
 
     # Typescript
     typescript

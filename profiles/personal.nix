@@ -13,6 +13,8 @@
   programs.rbenv.enable = true;
 
   home.packages = with pkgs; [
+    ruby
     ruby-lsp
+    solargraph
   ];
 }
