@@ -95,10 +95,6 @@
       :desc "Magit status" "s" #'magit-status
       :desc "Git blame" "b" #'magit-blame)
 
-(map! :after lsp-mode
-      (:localleader
-       :n "RET" (cmd! (lsp-execute-code-action))))
-
 (after! treemacs
   (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action))
 
@@ -109,21 +105,6 @@
   (add-hook 'vala-mode-hook #'lsp!))
 
 (setq! lsp-enable-file-watchers nil)
-
-;; Using yadm via magit
-;; https://philjackson.github.io/yadm/emacs/magit/2021/07/25/using-yadm-via-magit/
-(use-package! tramp
-  :config
-  (add-to-list 'tramp-methods
-               '("yadm"
-                 (tramp-login-program "yadm")
-                 (tramp-login-args (("enter")))
-                 (tramp-login-env (("SHELL") ("/bin/sh")))
-                 (tramp-remote-shell "/bin/sh")
-                 (tramp-remote-shell-args ("-c"))))
-  (defun yadm ()
-    (interactive)
-    (magit-status "/yadm::")))
 
 (setq! major-mode-remap-alist
        '((c++-mode . c++-ts-mode)
@@ -192,3 +173,6 @@
   "Search for a file in `doom-user-dir'."
   (interactive)
   (doom-project-find-file (expand-file-name "~/.config/home-manager/doom")))
+
+(setq! visual-fill-column-width 120)
+(add-hook! 'text-mode #'visual-fill-column-mode)
