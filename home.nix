@@ -38,6 +38,8 @@ in {
     tmux
     nixpkgsScript
     dos2unix
+    jq
+    yq
 
     # Fonts
     nerd-fonts.hasklug
@@ -59,6 +61,9 @@ in {
     poetry
     ruff
     uv
+
+    # Ruby
+    ruby
 
     # Language Server Protocol(s)
     clang-tools                  # C/C++

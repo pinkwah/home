@@ -175,4 +175,4 @@
   (doom-project-find-file (expand-file-name "~/.config/home-manager/doom")))
 
 (setq! visual-fill-column-width 120)
-(add-hook! 'text-mode #'visual-fill-column-mode)
+(add-hook! 'text-mode-hook #'visual-fill-column-mode)
