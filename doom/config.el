@@ -165,7 +165,7 @@
   :init
   (setq! lsp-tailwindcss-add-on-mode t
          lsp-tailwindcss-skip-config-check t
-	 lsp-tailwindcss-server-version "0.14.8"
+         lsp-tailwindcss-server-version "0.14.8"
          lsp-tailwindcss-server-command "tailwindcss-language-server"))
 
 ;;;###autoload
