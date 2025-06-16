@@ -174,5 +174,7 @@
   (interactive)
   (doom-project-find-file (expand-file-name "~/.config/home-manager/doom")))
 
+(doom-load-envvars-file (expand-file-name "~/.config/doom-init-env.el"))
+
 (setq! visual-fill-column-width 120)
 (add-hook! 'text-mode-hook #'visual-fill-column-mode)
