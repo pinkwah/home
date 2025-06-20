@@ -17,6 +17,7 @@
     ruby-lsp
     solargraph
     intelephense
+    astro-language-server
 
     (vala-language-server.overrideAttrs (final: prev: {
       version = "master";

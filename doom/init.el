@@ -114,7 +114,7 @@
        tty               ; improve the terminal Emacs experience
 
        :lang
-       ;; (astro +lsp)
+       (astro +lsp)
        ;;agda              ; types of types of types of types...
        ;;beancount         ; mind the GAAP
        bicep
