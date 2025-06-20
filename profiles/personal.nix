@@ -16,5 +16,16 @@
     ruby
     ruby-lsp
     solargraph
+    intelephense
+
+    (vala-language-server.overrideAttrs (final: prev: {
+      version = "master";
+      src = pkgs.fetchFromGitHub {
+        owner = "vala-lang";
+        repo = "vala-language-server";
+        rev = "master";
+        hash = "sha256-DZEVzwG+WqVjkh3VL5w9gWFbsCNib8gaWEQuJX9BlC0=";
+      };
+    }))
   ];
 }
