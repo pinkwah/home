@@ -64,7 +64,7 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { inherit system; };
           modules = modules ++ [
-            inputs.nix-index-database.hmModules.nix-index
+            inputs.nix-index-database.homeModules.nix-index
             inputs.doom-emacs.homeModule
             ./home.nix
             { home = { inherit username homeDirectory; }; }
