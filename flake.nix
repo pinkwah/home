@@ -20,6 +20,10 @@
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "";
     };
+    intellimacs = {
+      url = "github:marcoieni/intellimacs";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }:

@@ -133,6 +133,22 @@
         "type": "github"
       }
     },
+    "intellimacs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1730668190,
+        "narHash": "sha256-uANOwkA9EB3n1Kd+55420LJD7wrc4EDQ7z127HLvM2o=",
+        "owner": "marcoieni",
+        "repo": "intellimacs",
+        "rev": "cf9706cfeaf18e2247ee8f8c8289f1d196ce04b9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "marcoieni",
+        "repo": "intellimacs",
+        "type": "github"
+      }
+    },
     "mac-app-util": {
       "inputs": {
         "cl-nix-lite": "cl-nix-lite",
@@ -197,6 +213,7 @@
       "inputs": {
         "doom-emacs": "doom-emacs",
         "home-manager": "home-manager",
+        "intellimacs": "intellimacs",
         "mac-app-util": "mac-app-util",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs"

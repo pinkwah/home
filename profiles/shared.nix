@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -77,5 +77,18 @@
         exec fish $LOGIN_OPTION
       fi
     fi
+  '';
+
+  home.file.".intellimacs".source = inputs.intellimacs;
+  home.file.".ideavimrc".text = ''
+    source ~/.intellimacs/spacemacs.vim
+    source ~/.intellimacs/extra.vim
+    source ~/.intellimacs/major.vim
+    source ~/.intellimacs/hybrid.vim
+    source ~/.intellimacs/which-key.vim
+
+    let g:WhichKeyDesc_Files_GotoFile = "<leader><leader> goto-file";
+    nnoremap <leader><leader> :action GotoFile<CR>
+    vnoremap <leader><leader> :action GotoFile<CR>
   '';
 }
