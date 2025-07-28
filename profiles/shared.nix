@@ -31,6 +31,7 @@
       "result"
       "result-*"
       "venv/"
+      ".DS_Store"
     ];
   };
 
