@@ -24,20 +24,20 @@
 (if (featurep :system 'macos)
     (setq doom-font "JetBrainsMono NFM-16"
           doom-emoji-font "Apple Color Emoji")
-  (setq doom-font "JetBrainsMono NFM-11"
+  (setq doom-font "JetBrainsMono NFM-14"
         doom-emoji-font "Noto Color Emoji"))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(defcustom my-use-dark-theme nil
+(defcustom my-use-dark-theme t
   "If non-nil, use dark theme, otherwise light theme"
   :type 'boolean
   :group 'my-doom-themes)
 
 (setq my-light-theme 'doom-winter-is-coming-light
       my-dark-theme 'doom-ir-black)
-(setq doom-theme my-light-theme)
+(setq doom-theme (if my-use-dark-theme my-dark-theme my-light-theme))
 
 (defun my-toggle-theme ()
   "Toggle between light and dark theme"
@@ -182,6 +182,10 @@
          lsp-tailwindcss-skip-config-check t
          lsp-tailwindcss-server-version "0.14.8"
          lsp-tailwindcss-server-command "tailwindcss-language-server"))
+
+(use-package! justl
+  :config
+  (map! :n "e" 'justl-exec-recipe))
 
 ;;;###autoload
 (defun doom/find-file-in-private-config ()
