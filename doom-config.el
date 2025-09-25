@@ -183,9 +183,9 @@
          lsp-tailwindcss-server-version "0.14.8"
          lsp-tailwindcss-server-command "tailwindcss-language-server"))
 
-(use-package! justl
-  :config
-  (map! :n "e" 'justl-exec-recipe))
+;; (use-package! justl
+;;  :config
+;;  (map! :n "e" 'justl-exec-recipe))
 
 ;;;###autoload
 (defun doom/find-file-in-private-config ()
