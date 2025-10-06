@@ -68,7 +68,7 @@ in {
     # Language Server Protocol(s)
     clang-tools                  # C/C++
     nil                          # Nix
-    pyright                      # Python
+    basedpyright                 # Python
     rust-analyzer                # Rust
     yaml-language-server         # YAML
     vscode-langservers-extracted # CSS, EsLint, HTML, JSON, Markdown

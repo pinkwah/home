@@ -197,3 +197,5 @@
 
 (setq! visual-fill-column-width 120)
 (add-hook! 'text-mode-hook #'visual-fill-column-mode)
+
+(setq! lsp-pyright-langserver-command "basedpyright")
