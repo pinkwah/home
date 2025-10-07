@@ -183,6 +183,9 @@
          lsp-tailwindcss-server-version "0.14.8"
          lsp-tailwindcss-server-command "tailwindcss-language-server"))
 
+(use-package! lsp-pyright
+  :custom (lsp-pyright-langserver-command "basedpyright"))
+
 ;; (use-package! justl
 ;;  :config
 ;;  (map! :n "e" 'justl-exec-recipe))
@@ -197,5 +200,3 @@
 
 (setq! visual-fill-column-width 120)
 (add-hook! 'text-mode-hook #'visual-fill-column-mode)
-
-(setq! lsp-pyright-langserver-command "basedpyright")
