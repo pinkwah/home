@@ -40,6 +40,7 @@ in {
     dos2unix
     jq
     yq
+    socat
 
     # Fonts
     nerd-fonts.hasklug

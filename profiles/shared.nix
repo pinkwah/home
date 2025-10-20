@@ -79,6 +79,7 @@
       fi
     fi
   '';
+  home.file.".bashrc.d/fish".enable = false;
 
   home.file.".intellimacs".source = inputs.intellimacs;
   home.file.".ideavimrc".text = ''
