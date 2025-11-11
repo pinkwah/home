@@ -67,6 +67,7 @@ in {
     ruby
 
     # Language Server Protocol(s)
+    astro-language-server        # Astro.build
     clang-tools                  # C/C++
     nil                          # Nix
     basedpyright                 # Python
