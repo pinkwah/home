@@ -3,9 +3,9 @@
 {
   imports = [ ./shared.nix ];
 
-  programs.git = {
-    userEmail = "git@wah.pink";
-    userName = "Tenné";
+  programs.git.settings = {
+    user.email = "git@wah.pink";
+    user.name = "Tenné";
     signing.key = "A32FDE70EBD85C34";
     signing.signByDefault = true;
   };

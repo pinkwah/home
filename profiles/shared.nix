@@ -88,6 +88,7 @@
     source ~/.intellimacs/major.vim
     source ~/.intellimacs/hybrid.vim
     source ~/.intellimacs/which-key.vim
+    source ~/.config/home-manager/ideavim-config.vim
 
     let g:WhichKeyDesc_Files_GotoFile = "<leader><leader> goto-file";
     nnoremap <leader><leader> :action GotoFile<CR>

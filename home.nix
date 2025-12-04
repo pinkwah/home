@@ -18,8 +18,6 @@ in {
       tree-sitter = prev.tree-sitter.override {
         extraGrammars = import ./tree-sitter-grammars.nix { inherit (prev) lib fetchFromGitHub tree-sitter; };
       };
-
-      tailwindcss-language-server = prev.callPackage ./pkgs/tailwindcss-language-server {};
     })
   ];
 
@@ -47,9 +45,9 @@ in {
     nerd-fonts.jetbrains-mono
     nerd-fonts.blex-mono
     nerd-fonts.symbols-only
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     corefonts
-    vistafonts
+    vista-fonts
     jetbrains-mono
 
     # C / C++
