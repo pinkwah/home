@@ -25,7 +25,7 @@
         owner = "vala-lang";
         repo = "vala-language-server";
         rev = "master";
-        hash = "sha256-DZEVzwG+WqVjkh3VL5w9gWFbsCNib8gaWEQuJX9BlC0=";
+        hash = "sha256-GDrEBy5xOb4JJB6g7PrDKK5KCXZfWVGg8ghQ+lM7dWY=";
       };
     }))
   ];

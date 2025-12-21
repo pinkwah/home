@@ -200,3 +200,5 @@
 
 (setq! visual-fill-column-width 120)
 (add-hook! 'text-mode-hook #'visual-fill-column-mode)
+
+(setq! vterm-shell (expand-file-name "~/.nix-profile/bin/fish"))
