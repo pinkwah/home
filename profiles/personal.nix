@@ -28,6 +28,9 @@
         hash = "sha256-GDrEBy5xOb4JJB6g7PrDKK5KCXZfWVGg8ghQ+lM7dWY=";
       };
     }))
+
+    xwayland-satellite
+    waypipe
   ];
 
   services.gpg-agent = {
