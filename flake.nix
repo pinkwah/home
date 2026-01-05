@@ -53,7 +53,8 @@
           system = "aarch64-darwin";
           username = "ZOM";
           homeDirectory = "/Users/ZOM";
-          modules = [ inputs.mac-app-util.homeManagerModules.default ./profiles/work-managed-macos.nix ];
+          # modules = [ inputs.mac-app-util.homeManagerModules.default ./profiles/work-managed-macos.nix ];
+          modules = [ ./profiles/work-managed-macos.nix ];
         };
       };
 
