@@ -4,19 +4,11 @@
   home.packages = with pkgs; [
     # Python
     ruff
+
+    inputs.doom-emacs.packages.${pkgs.stdenv.system}.default
   ];
 
   fonts.fontconfig.enable = true;
-
-  programs.doom-emacs = {
-    enable = true;
-    emacs = pkgs.emacs30-pgtk;
-    doomDir = ../doom;
-
-    extraPackages = epkgs: with epkgs; [
-      treesit-grammars.with-all-grammars
-    ];
-  };
 
   programs.direnv.enable = true;
   programs.fish.enable = true;

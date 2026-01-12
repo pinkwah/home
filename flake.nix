@@ -1,6 +1,17 @@
 {
   description = "Home Manager configuration of zohar";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://pinkwah.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "pinkwah.cachix.org-1:ixwSFCqREV6E/3CAf4gjyd75PZQkRizMKzlkmlrdsx4="
+    ];
+  };
+
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
@@ -16,10 +27,7 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    doom-emacs = {
-      url = "github:marienz/nix-doom-emacs-unstraightened/lsp-use-plists";
-      inputs.nixpkgs.follows = "";
-    };
+    doom-emacs.url = "github:pinkwah/my-doom-config";
     intellimacs = {
       url = "github:marcoieni/intellimacs";
       flake = false;
@@ -70,7 +78,6 @@
           pkgs = import nixpkgs { inherit system; };
           modules = modules ++ [
             inputs.nix-index-database.homeModules.nix-index
-            inputs.doom-emacs.homeModule
             ./home.nix
             { home = { inherit username homeDirectory; }; }
           ];

@@ -13,27 +13,17 @@ let
 
 in {
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [
-    (final: prev: {
-      tree-sitter = prev.tree-sitter.override {
-        extraGrammars = import ./tree-sitter-grammars.nix { inherit (prev) lib fetchFromGitHub tree-sitter; };
-      };
-    })
-  ];
 
   home.stateVersion = "25.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
     # Misc
-    attic-client
     cachix
     devenv
     fd
     glab
     yadm
     htop
-    btop
-    tmux
     nixpkgsScript
     dos2unix
     jq
@@ -41,28 +31,11 @@ in {
     socat
 
     # Fonts
-    nerd-fonts.hasklug
     nerd-fonts.jetbrains-mono
-    nerd-fonts.blex-mono
     nerd-fonts.symbols-only
     noto-fonts-color-emoji
     corefonts
     vista-fonts
-    jetbrains-mono
-
-    # C / C++
-    conan
-    meson
-    ninja
-
-    # Python
-    black
-    poetry
-    ruff
-    uv
-
-    # Ruby
-    ruby
 
     # Language Server Protocol(s)
     astro-language-server        # Astro.build
