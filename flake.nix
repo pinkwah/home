@@ -19,6 +19,7 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lazyvim-nix.url = "github:pfassina/lazyvim-nix";
     mac-app-util = {
       url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -78,6 +79,7 @@
           pkgs = import nixpkgs { inherit system; };
           modules = modules ++ [
             inputs.nix-index-database.homeModules.nix-index
+            inputs.lazyvim-nix.homeManagerModules.lazyvim
             ./home.nix
             { home = { inherit username homeDirectory; }; }
           ];

@@ -86,4 +86,29 @@
     nnoremap <leader><leader> :action GotoFile<CR>
     vnoremap <leader><leader> :action GotoFile<CR>
   '';
+
+  programs.lazyvim = {
+    enable = true;
+
+    extras = {
+      lang.astro.enable = true;
+      lang.clangd.enable = true;
+      lang.cmake.enable = true;
+      lang.docker.enable = true;
+      lang.git.enable = true;
+      lang.json.enable = true;
+      lang.markdown.enable = true;
+      lang.nix.enable = true;
+      lang.php.enable = true;
+      lang.python.enable = true;
+      lang.ruby.enable = true;
+      lang.rust.enable = true;
+      lang.sql.enable = true;
+      lang.tailwind.enable = true;
+      lang.tex.enable = true;
+      lang.toml.enable = true;
+      lang.typescript.enable = true;
+      lang.yaml.enable = true;
+    };
+  };
 }
