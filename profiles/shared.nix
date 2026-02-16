@@ -90,6 +90,12 @@
   programs.lazyvim = {
     enable = true;
 
+    config = {
+      options = ''
+        vim.g.lazyvim_python_lsp = "basedpyright"
+      '';
+    };
+
     extras = {
       lang.astro.enable = true;
       lang.clangd.enable = true;
@@ -100,7 +106,12 @@
       lang.markdown.enable = true;
       lang.nix.enable = true;
       lang.php.enable = true;
-      lang.python.enable = true;
+
+      lang.python = {
+        enable = true;
+        installDependencies = true;
+      };
+
       lang.ruby.enable = true;
       lang.rust.enable = true;
       lang.sql.enable = true;
@@ -110,5 +121,9 @@
       lang.typescript.enable = true;
       lang.yaml.enable = true;
     };
+
+    extraPackages = with pkgs; [
+      basedpyright
+    ];
   };
 }
