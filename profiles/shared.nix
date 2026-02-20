@@ -32,6 +32,14 @@
   programs.home-manager.enable = true;
   programs.jq.enable = true;
   programs.lsd.enable = true;
+
+  programs.neovide = {
+    enable = true;
+    settings = {
+      fork = true;
+    };
+  };
+
   programs.nix-index-database.comma.enable = true;
   programs.nix-your-shell.enable = true;
 
@@ -179,4 +187,6 @@
       basedpyright
     ];
   };
+
+  targets.genericLinux.gpu.enable = true;
 }
