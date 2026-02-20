@@ -3,8 +3,8 @@
     "cl-nix-lite": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "nixpkgs": "nixpkgs_3",
-        "systems": "systems_3",
+        "nixpkgs": "nixpkgs_2",
+        "systems": "systems_2",
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
@@ -18,95 +18,6 @@
       "original": {
         "owner": "hraban",
         "repo": "cl-nix-lite",
-        "type": "github"
-      }
-    },
-    "doom-emacs": {
-      "inputs": {
-        "doom-emacs": "doom-emacs_2",
-        "doomemacs-src": "doomemacs-src",
-        "nixpkgs": "nixpkgs",
-        "tree-sitter-astro-src": "tree-sitter-astro-src",
-        "tree-sitter-bicep-src": "tree-sitter-bicep-src"
-      },
-      "locked": {
-        "lastModified": 1769727389,
-        "narHash": "sha256-xEw/90ugSeeixHqdVd/VW3D4OcS5X+ZsEkICaGFnTEU=",
-        "owner": "pinkwah",
-        "repo": "my-doom-config",
-        "rev": "3458e5ccdaec3cf2e4d9a52ea0429076aa3dd28e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pinkwah",
-        "repo": "my-doom-config",
-        "type": "github"
-      }
-    },
-    "doom-emacs_2": {
-      "inputs": {
-        "doomemacs": [
-          "doom-emacs",
-          "doomemacs-src"
-        ],
-        "emacs-overlay": "emacs-overlay",
-        "nixpkgs": [
-          "doom-emacs"
-        ],
-        "systems": "systems"
-      },
-      "locked": {
-        "lastModified": 1768121037,
-        "narHash": "sha256-XmSEsrxl35IJ4DpN78bdUnA4pGeiG0ws63T9GRQWfec=",
-        "owner": "marienz",
-        "repo": "nix-doom-emacs-unstraightened",
-        "rev": "00c63be6c3acb8c94c7408bd844a7e2ac170f832",
-        "type": "github"
-      },
-      "original": {
-        "owner": "marienz",
-        "repo": "nix-doom-emacs-unstraightened",
-        "type": "github"
-      }
-    },
-    "doomemacs-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1768984347,
-        "narHash": "sha256-VvC4rgAAaFnYLCdcUoz7dTE3kuBNuHIc+GlXOrPCxpg=",
-        "owner": "doomemacs",
-        "repo": "doomemacs",
-        "rev": "57818a6da90fbef39ff80d62fab2cd319496c3b9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "doomemacs",
-        "repo": "doomemacs",
-        "type": "github"
-      }
-    },
-    "emacs-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "doom-emacs",
-          "doom-emacs"
-        ],
-        "nixpkgs-stable": [
-          "doom-emacs",
-          "doom-emacs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1768099053,
-        "narHash": "sha256-xRpjjgMIfAmWTsEb/lSx4uDmylt2NUo4hZwe7fUGdLI=",
-        "owner": "nix-community",
-        "repo": "emacs-overlay",
-        "rev": "9b322556dbd6b602a3f0be434663cfc612618d0c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "emacs-overlay",
         "type": "github"
       }
     },
@@ -147,7 +58,7 @@
     },
     "flake-utils": {
       "inputs": {
-        "systems": "systems_2"
+        "systems": "systems"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -223,7 +134,7 @@
     "lazyvim-nix": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "lastModified": 1770068987,
@@ -247,7 +158,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": "systems_4",
+        "systems": "systems_3",
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
@@ -286,16 +197,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1768165233,
-        "narHash": "sha256-1Luqz1JQiv6DIYR7bDnXcCr+NZf+zx3QG2TMYyKJZes=",
-        "owner": "nixos",
+        "lastModified": 1752480373,
+        "narHash": "sha256-JHQbm+OcGp32wAsXTE/FLYGNpb+4GLi5oTvCxwSoBOA=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1b6335c11840e8c805bc4958396997161ee2d4b5",
+        "rev": "62e0f05ede1da0d54515d4ea8ce9c733f12d9f08",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "release-25.11",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -317,22 +228,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1752480373,
-        "narHash": "sha256-JHQbm+OcGp32wAsXTE/FLYGNpb+4GLi5oTvCxwSoBOA=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "62e0f05ede1da0d54515d4ea8ce9c733f12d9f08",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1766736597,
         "narHash": "sha256-BASnpCLodmgiVn0M1MU2Pqyoz0aHwar/0qLkp7CjvSQ=",
         "owner": "nixos",
@@ -343,6 +238,22 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1761236834,
+        "narHash": "sha256-+pthv6hrL5VLW2UqPdISGuLiUZ6SnAXdd2DdUE+fV2Q=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d5faa84122bc0a1fd5d378492efce4e289f8eac1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -365,22 +276,6 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1761236834,
-        "narHash": "sha256-+pthv6hrL5VLW2UqPdISGuLiUZ6SnAXdd2DdUE+fV2Q=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "d5faa84122bc0a1fd5d378492efce4e289f8eac1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_6": {
-      "locked": {
         "lastModified": 1771043024,
         "narHash": "sha256-O1XDr7EWbRp+kHrNNgLWgIrB0/US5wvw9K6RERWAj6I=",
         "owner": "nixos",
@@ -397,13 +292,12 @@
     },
     "root": {
       "inputs": {
-        "doom-emacs": "doom-emacs",
         "home-manager": "home-manager",
         "intellimacs": "intellimacs",
         "lazyvim-nix": "lazyvim-nix",
         "mac-app-util": "mac-app-util",
         "nix-index-database": "nix-index-database",
-        "nixpkgs": "nixpkgs_6"
+        "nixpkgs": "nixpkgs_5"
       }
     },
     "systems": {
@@ -438,21 +332,6 @@
     },
     "systems_3": {
       "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
-    "systems_4": {
-      "locked": {
         "lastModified": 1689347925,
         "narHash": "sha256-ozenz5bFe1UUqOn7f60HRmgc01BgTGIKZ4Xl+HbocGQ=",
         "owner": "nix-systems",
@@ -466,41 +345,9 @@
         "type": "github"
       }
     },
-    "tree-sitter-astro-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1745424178,
-        "narHash": "sha256-TpXs3jbYn39EHxTdtSfR7wLA1L8v9uyK/ATPp5v4WqE=",
-        "owner": "virchau13",
-        "repo": "tree-sitter-astro",
-        "rev": "213f6e6973d9b456c6e50e86f19f66877e7ef0ee",
-        "type": "github"
-      },
-      "original": {
-        "owner": "virchau13",
-        "repo": "tree-sitter-astro",
-        "type": "github"
-      }
-    },
-    "tree-sitter-bicep-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1734837732,
-        "narHash": "sha256-+qvhJgYqs8aj/Kmojr7lmjbXmskwVvbYBn4ia9wOv3k=",
-        "owner": "tree-sitter-grammars",
-        "repo": "tree-sitter-bicep",
-        "rev": "bff59884307c0ab009bd5e81afd9324b46a6c0f9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tree-sitter-grammars",
-        "repo": "tree-sitter-bicep",
-        "type": "github"
-      }
-    },
     "treefmt-nix": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1766000401,
@@ -518,7 +365,7 @@
     },
     "treefmt-nix_2": {
       "inputs": {
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1766000401,

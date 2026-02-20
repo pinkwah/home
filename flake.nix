@@ -28,14 +28,14 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    doom-emacs.url = "github:pinkwah/my-doom-config";
     intellimacs = {
       url = "github:marcoieni/intellimacs";
       flake = false;
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
+  outputs =
+    inputs@{ nixpkgs, home-manager, ... }:
     let
       inherit (nixpkgs) lib;
 
@@ -74,19 +74,32 @@
         zom = work-managed-linux;
       };
 
-      mkHome = { system, username, homeDirectory, modules ? [] }:
+      mkHome =
+        {
+          system,
+          username,
+          homeDirectory,
+          modules ? [ ],
+        }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { inherit system; };
           modules = modules ++ [
             inputs.nix-index-database.homeModules.nix-index
             inputs.lazyvim-nix.homeManagerModules.lazyvim
-            ./home.nix
-            { home = { inherit username homeDirectory; }; }
+            {
+              nixpkgs.config.allowUnfree = true;
+
+              home = {
+                inherit username homeDirectory;
+                stateVersion = "25.11";
+              };
+            }
           ];
           extraSpecialArgs = { inherit inputs; };
         };
 
-    in {
+    in
+    {
       homeConfigurations = lib.mapAttrs (_: mkHome) configs;
     };
 }
