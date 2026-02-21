@@ -6,9 +6,11 @@
 
     config = {
       options = ''
-        vim.g.lazyvim_python_lsp = "basedpyright"
         vim.opt.ttimeoutlen = 10
         vim.opt.shell = vim.fn.expand('~/.nix-profile/bin/fish')
+
+        vim.g.lazyvim_python_lsp = "basedpyright"
+        vim.g.lazyvim_picker = "telescope"
       '';
 
       keymaps = ''
@@ -62,7 +64,9 @@
       lang.ruby.enable = true;
       lang.rust.enable = true;
       lang.sql.enable = true;
+
       lang.tailwind.enable = true;
+
       lang.tex.enable = true;
       lang.toml.enable = true;
       lang.typescript.enable = true;
@@ -70,6 +74,40 @@
     };
 
     plugins = {
+      direnv = ''
+        return {
+          'direnv/direnv.vim',
+          lazy = false,
+        }
+      '';
+
+      telescope = ''
+        return {
+          'nvim-telescope/telescope.nvim',
+
+          dependencies = {
+            'nvim-lua/plenary.nvim',
+            {
+              'nvim-telescope/telescope-file-browser.nvim',
+              dependencies = { 'nvim-telescope/telescope.nvim' },
+            },
+          },
+
+          opts = {
+            defaults = {
+              path_display = { 'smart' },
+            },
+
+            extensions = {
+              file_browser = {
+                hidden = true,
+                respect_gitignore = true,
+              },
+            },
+          },
+        }
+      '';
+
       toggleterm = ''
         return {
           'akinsho/toggleterm.nvim',
@@ -80,17 +118,22 @@
           }
         }
       '';
-
-      direnv = ''
-        return {
-          'direnv/direnv.vim',
-          lazy = false,
-        }
-      '';
     };
 
     extraPackages = with pkgs; [
-      basedpyright
     ];
   };
+
+  # I can't get programs.lazyvim.extraPackages to work so instead we install dependencies worldwide
+  home.packages = with pkgs; [
+    astro-language-server        # Astro.build
+    clang-tools                  # C/C++
+    nil                          # Nix
+    basedpyright                 # Python
+    rust-analyzer                # Rust
+    yaml-language-server         # YAML
+    vscode-langservers-extracted # CSS, EsLint, HTML, JSON, Markdown
+    typescript-language-server   # {Java,Type}script
+    tailwindcss-language-server  # TailwindCSS
+  ];
 }
