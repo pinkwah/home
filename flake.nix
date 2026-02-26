@@ -48,6 +48,7 @@
         };
 
         work-unmanaged-linux = personal // {
+          homeDirectory = "/home/zohar";
           modules = [ ./profiles/work-unmanaged-linux.nix ];
         };
 
