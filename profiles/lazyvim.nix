@@ -81,6 +81,30 @@
         }
       '';
 
+      neogit = ''
+        return {
+          'NeogitOrg/neogit',
+          lazy = false,
+          dependencies = {
+            'nvim-lua/plenary.nvim',
+
+            -- Only one of these is needed.
+            "sindrets/diffview.nvim",
+            -- "esmuellert/codediff.nvim",
+
+            -- Only one of these is needed.
+            "nvim-telescope/telescope.nvim",
+            -- "ibhagwan/fzf-lua",
+            -- "nvim-mini/mini.pick",
+            -- "folke/snacks.nvim",
+          },
+          cmd = 'Neogit',
+          keys = {
+            { '<leader>gs', '<CMD>Neogit<CR>', desc = 'Show Neogit UI' }
+          },
+        }
+      '';
+
       telescope = ''
         return {
           'nvim-telescope/telescope.nvim',
@@ -126,14 +150,14 @@
 
   # I can't get programs.lazyvim.extraPackages to work so instead we install dependencies worldwide
   home.packages = with pkgs; [
-    astro-language-server        # Astro.build
-    clang-tools                  # C/C++
-    nil                          # Nix
-    basedpyright                 # Python
-    rust-analyzer                # Rust
-    yaml-language-server         # YAML
+    astro-language-server # Astro.build
+    clang-tools # C/C++
+    nil # Nix
+    basedpyright # Python
+    rust-analyzer # Rust
+    yaml-language-server # YAML
     vscode-langservers-extracted # CSS, EsLint, HTML, JSON, Markdown
-    typescript-language-server   # {Java,Type}script
-    tailwindcss-language-server  # TailwindCSS
+    typescript-language-server # {Java,Type}script
+    tailwindcss-language-server # TailwindCSS
   ];
 }
