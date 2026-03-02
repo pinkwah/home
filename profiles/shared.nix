@@ -76,6 +76,19 @@
 
   programs.ripgrep.enable = true;
 
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host deimos hetzner-fi-1
+        Hostname hetzner-fi-1.hosts.zohar.no
+        User zohar
+
+      Host phobos hetzner-fi-2
+        Hostname hetzner-fi-2.hosts.zohar.no
+        User zohar
+    '';
+  };
+
   programs.uv = {
     enable = true;
     settings = {
@@ -117,6 +130,4 @@
     nnoremap <leader><leader> :action GotoFile<CR>
     vnoremap <leader><leader> :action GotoFile<CR>
   '';
-
-  targets.genericLinux.gpu.enable = true;
 }

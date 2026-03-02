@@ -11,6 +11,8 @@
 
         vim.g.lazyvim_python_lsp = "basedpyright"
         vim.g.lazyvim_picker = "telescope"
+
+        vim.lsp.enable('herb_ls')
       '';
 
       keymaps = ''
@@ -61,7 +63,12 @@
         installDependencies = true;
       };
 
-      lang.ruby.enable = true;
+      lang.ruby = {
+        enable = true;
+        installDependencies = true;
+        installRuntimeDependencies = true;
+      };
+
       lang.rust.enable = true;
       lang.sql.enable = true;
 
@@ -142,6 +149,12 @@
           }
         }
       '';
+
+      rails = ''
+        return {
+          'tpope/vim-rails',
+        }
+      '';
     };
 
     extraPackages = with pkgs; [
@@ -159,5 +172,28 @@
     vscode-langservers-extracted # CSS, EsLint, HTML, JSON, Markdown
     typescript-language-server # {Java,Type}script
     tailwindcss-language-server # TailwindCSS
+
+    # Ruby
+    rubyPackages.erb-formatter
+    (stdenv.mkDerivation rec {
+      pname = "herb-language-server";
+      version = "0.8.10";
+
+      src = fetchurl {
+        url = "https://registry.npmjs.org/@herb-tools/language-server/-/language-server-${version}.tgz";
+        hash = "sha256-hIU1Ts5P4M6FwfYcVqEN2tkjduYY6p7/+WlHscv1Rjg=";
+      };
+
+      nativeBuildInputs = [
+        nodejs
+      ];
+
+      installPhase = ''
+        mkdir -p $out
+        cp -r . $out/
+
+        patchShebangs $out
+      '';
+    })
   ];
 }

@@ -39,17 +39,26 @@
     let
       inherit (nixpkgs) lib;
 
+      linuxGpu = {
+        targets.genericLinux.gpu.enable = true;
+      };
+
+      linuxGpuNvidia = {
+        targets.genericLinux.gpu.enable = true;
+        targets.genericLinux.gpu.nvidia.enable = true;
+      };
+
       profiles = rec {
         personal = {
           system = "x86_64-linux";
           username = "zohar";
           homeDirectory = "/var/home/zohar";
-          modules = [ ./profiles/personal.nix ];
+          modules = [ ./profiles/personal.nix linuxGpu ];
         };
 
         work-unmanaged-linux = personal // {
           homeDirectory = "/home/zohar";
-          modules = [ ./profiles/work-unmanaged-linux.nix ];
+          modules = [ ./profiles/work-unmanaged-linux.nix linuxGpuNvidia ];
         };
 
         work-managed-linux = {
