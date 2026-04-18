@@ -83,8 +83,10 @@
     plugins = {
       direnv = ''
         return {
-          'direnv/direnv.vim',
-          lazy = false,
+          'NotAShelf/direnv.nvim',
+          config = function()
+            require('direnv').setup({})
+          end,
         }
       '';
 
