@@ -58,7 +58,7 @@
 
         work-unmanaged-linux = personal // {
           homeDirectory = "/home/zohar";
-          modules = [ ./profiles/work-unmanaged-linux.nix linuxGpuNvidia ];
+          modules = [ ./profiles/work-unmanaged-linux.nix linuxGpu ];
         };
 
         work-managed-linux = {
