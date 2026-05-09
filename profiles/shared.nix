@@ -56,6 +56,16 @@
   programs.jq.enable = true;
   programs.lsd.enable = true;
 
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+    escapeTime = 0;
+    mouse = true;
+    newSession = true;
+    shell = "fish";
+    terminal = "screen-256color";
+  };
+
   programs.neovide = {
     enable = true;
     settings = {
