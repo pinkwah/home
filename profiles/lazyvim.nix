@@ -175,6 +175,8 @@
     typescript-language-server # {Java,Type}script
     tailwindcss-language-server # TailwindCSS
 
+    statix # Nix static analyser?
+
     # Ruby
     rubyPackages.erb-formatter
     (stdenv.mkDerivation rec {
