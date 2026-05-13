@@ -14,13 +14,13 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # https://github.com/NixOS/nixpkgs/issues/507531#issuecomment-4391486390
     nixpkgs-darwin-fish-fix.url = "github:nixos/nixpkgs/9b8e6819224551756919099c1fce6e347f5a3803";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lazyvim-nix.url = "github:pfassina/lazyvim-nix";
@@ -65,7 +65,10 @@
 
         work-unmanaged-linux = personal // {
           homeDirectory = "/home/zohar";
-          modules = [ ./profiles/work-unmanaged-linux.nix linuxGpu ];
+          modules = [
+            ./profiles/work-unmanaged-linux.nix
+            linuxGpu
+          ];
         };
 
         work-managed-linux = {
@@ -110,15 +113,13 @@
               # https://github.com/NixOS/nixpkgs/issues/507531#issuecomment-4391486390
               nixpkgs.overlays = [
                 (
-                  (
-                    _final: prev:
-                    if prev.stdenv.hostPlatform.isDarwin then
-                      {
-                        fish = inputs.nixpkgs-darwin-fish-fix.legacyPackages.${prev.stdenv.hostPlatform.system}.fish;
-                      }
-                    else
-                      { }
-                  )
+                  _final: prev:
+                  if prev.stdenv.hostPlatform.isDarwin then
+                    {
+                      inherit (inputs.nixpkgs-darwin-fish-fix.legacyPackages.${prev.stdenv.hostPlatform.system}) fish;
+                    }
+                  else
+                    { }
                 )
               ];
 
