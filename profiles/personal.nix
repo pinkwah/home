@@ -17,6 +17,7 @@
     ruby-lsp
     solargraph
     intelephense
+    sops
 
     (vala-language-server.overrideAttrs (final: prev: {
       version = "master";

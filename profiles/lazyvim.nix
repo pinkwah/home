@@ -109,7 +109,7 @@
           },
           cmd = 'Neogit',
           keys = {
-            { '<leader>gs', '<CMD>Neogit<CR>', desc = 'Show Neogit UI' }
+            { '<leader>G', '<CMD>Neogit<CR>', desc = 'Show Neogit UI' }
           },
         }
       '';

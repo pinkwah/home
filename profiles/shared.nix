@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [ ./lazyvim.nix ];
@@ -62,7 +67,7 @@
     escapeTime = 0;
     mouse = true;
     newSession = true;
-    shell = "fish";
+    shell = lib.getExe pkgs.fish;
     terminal = "screen-256color";
   };
 
@@ -89,13 +94,13 @@
   programs.ssh = {
     enable = true;
     extraConfig = ''
-      Host deimos hetzner-fi-1
-        Hostname hetzner-fi-1.hosts.zohar.no
-        User zohar
+      Host phobos
+        Hostname phobos.hosts.zohar.no
+        User root
 
-      Host phobos hetzner-fi-2
-        Hostname hetzner-fi-2.hosts.zohar.no
-        User zohar
+      Host deimos
+        Hostname deimos.hosts.zohar.no
+        User root
     '';
   };
 
