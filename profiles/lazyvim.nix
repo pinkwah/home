@@ -9,7 +9,8 @@
         vim.opt.ttimeoutlen = 10
         vim.opt.shell = vim.fn.expand('~/.nix-profile/bin/fish')
 
-        vim.g.lazyvim_python_lsp = "basedpyright"
+        vim.g.lazyvim_python_lsp = "ty"
+        vim.g.lazyvim_python_ruff = "ruff"
         vim.g.lazyvim_picker = "telescope"
 
         vim.lsp.enable('herb_ls')
@@ -182,7 +183,7 @@
     astro-language-server # Astro.build
     clang-tools # C/C++
     nil # Nix
-    basedpyright # Python
+    ty # Python
     rust-analyzer # Rust
     yaml-language-server # YAML
     vscode-langservers-extracted # CSS, EsLint, HTML, JSON, Markdown
