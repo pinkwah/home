@@ -58,67 +58,83 @@
         ];
 
         flake = {
-          homeConfigurations =
-            let
-              hm = inputs.home-manager.lib.homeManagerConfiguration;
-            in
-            {
-              # Personal
-              zohar = hm {
-                system = "x86_64-linux";
-                username = "zohar";
-                homeDirectory = "/var/home/zohar";
-
-                modules = [ ./profiles/personal.nix ];
-              };
-
-              # Unmanaged Linux
-              "zohar@ZOM-EquinorUMPC" = {
-                system = "x86_64-linux";
-                username = "zohar";
-                homeDirectory = "/var/home/zohar";
-
-                modules = [ ./profiles/work-unmanaged-linux.nix ];
-              };
-
-              # Managed Linux
-              zom = hm {
-                system = "x86_64-linux";
-                username = "zom";
-                homeDirectory = "/private/zom";
-
-                modules = [ ./profiles/work-managed-linux.nix ];
-              };
-
-              # Managed macOS
-              ZOM = hm {
-                system = "aarch64-darwin";
-                username = "ZOM";
-                homeDirectory = "/Users/ZOM";
-
-                modules = [ ./profiles/work-managed-macos.nix ];
-              };
+          homeConfigurations = {
+            # Personal
+            zohar = inputs.home-manager.lib.homeManagerConfiguration {
+              pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+              modules = [
+                inputs.self.homeModules.default
+                ./profiles/personal.nix
+                {
+                  home = {
+                    username = "zohar";
+                    homeDirectory = "/var/home/zohar";
+                  };
+                }
+              ];
+              extraSpecialArgs = { inherit inputs; };
             };
 
-          homeModules = {
-            nix-index = inputs.nix-index-database.homeModules.nix-index;
-            lazyvim = inputs.lazyvim-nix.homeManagerModules.lazyvim;
-
-            defaults = {
-              nixpkgs.config.allowUnfree = true;
-
-              # https://github.com/NixOS/nixpkgs/issues/507531#issuecomment-4391486390
-              nixpkgs.overlays = [
-                (
-                  _final: prev:
-                  if prev.stdenv.hostPlatform.isDarwin then
-                    {
-                      inherit (inputs.nixpkgs-darwin-fish-fix.legacyPackages.${prev.stdenv.hostPlatform.system}) fish;
-                    }
-                  else
-                    { }
-                )
+            # Unmanaged Linux
+            "zohar@ZOM-EquinorUMPC" = inputs.home-manager.lib.homeManagerConfiguration {
+              pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+              modules = [
+                ./profiles/work-unmanaged-linux.nix
+                {
+                  home = {
+                    username = "zohar";
+                    homeDirectory = "/var/home/zohar";
+                  };
+                }
               ];
+            };
+
+            # Managed Linux
+            zom = inputs.home-manager.lib.homeManagerConfiguration {
+              pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+              modules = [
+                ./profiles/work-managed-linux.nix
+                {
+                  home = {
+                    username = "zom";
+                    homeDirectory = "/private/zom";
+                  };
+                }
+              ];
+            };
+
+            # Managed macOS
+            ZOM = inputs.home-manager.lib.homeManagerConfiguration {
+              pkgs = import inputs.nixpkgs {
+                system = "aarch64-darwin";
+
+                # https://github.com/NixOS/nixpkgs/issues/507531#issuecomment-4391486390
+                overlays = [
+                  (_final: prev: {
+                    inherit (inputs.nixpkgs-darwin-fish-fix.legacyPackages.${prev.stdenv.hostPlatform.system}) fish;
+                  })
+                ];
+              };
+              modules = [
+                ./profiles/work-managed-macos.nix
+                {
+                  home = {
+                    username = "ZOM";
+                    homeDirectory = "/Users/ZOM";
+                  };
+                }
+              ];
+            };
+          };
+
+          homeModules = {
+            default = {
+              imports = [
+                inputs.nix-index-database.homeModules.nix-index
+                inputs.lazyvim-nix.homeManagerModules.lazyvim
+              ];
+
+              nixpkgs.config.allowUnfree = true;
 
               home = {
                 stateVersion = "25.11";
