@@ -19,15 +19,17 @@
     intelephense
     sops
 
-    (vala-language-server.overrideAttrs (final: prev: {
-      version = "master";
-      src = pkgs.fetchFromGitHub {
-        owner = "vala-lang";
-        repo = "vala-language-server";
-        rev = "master";
-        hash = "sha256-GDrEBy5xOb4JJB6g7PrDKK5KCXZfWVGg8ghQ+lM7dWY=";
-      };
-    }))
+    (vala-language-server.overrideAttrs (
+      final: prev: {
+        version = "master";
+        src = pkgs.fetchFromGitHub {
+          owner = "vala-lang";
+          repo = "vala-language-server";
+          rev = "master";
+          hash = "sha256-GDrEBy5xOb4JJB6g7PrDKK5KCXZfWVGg8ghQ+lM7dWY=";
+        };
+      }
+    ))
   ];
 
   services.gpg-agent = {

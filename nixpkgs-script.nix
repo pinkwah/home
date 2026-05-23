@@ -1,4 +1,9 @@
-{ inputs, lib, stdenv, crystal }:
+{
+  inputs,
+  lib,
+  stdenv,
+  crystal,
+}:
 
 stdenv.mkDerivation {
   pname = "nixpkgs-script";
