@@ -81,6 +81,20 @@
     };
 
     plugins = {
+      colorscheme = ''
+        return {
+          {
+            'olimorris/onedarkpro.nvim',
+          },
+          {
+            'LazyVim/LazyVim',
+            opts = {
+              colorscheme = 'onedark_dark',
+            },
+          },
+        }
+      '';
+
       direnv = ''
         return {
           'NotAShelf/direnv.nvim',
