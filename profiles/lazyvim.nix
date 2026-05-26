@@ -49,7 +49,7 @@
     };
 
     extras = {
-      lang.astro.enable = true;
+      lang.astro.enable = false;
       lang.clangd.enable = true;
       lang.cmake.enable = true;
       lang.docker.enable = true;
@@ -85,14 +85,19 @@
       colorscheme = ''
         return {
           {
-            'olimorris/onedarkpro.nvim',
+            'diegoulloao/neofusion.nvim',
+            priority = 1000,
+            config = true,
+            opts = {},
           },
+
+          -- Configure LazyVim to load theme
           {
             'LazyVim/LazyVim',
             opts = {
-              colorscheme = 'onedark_dark',
+              colorscheme = 'neofusion',
             },
-          },
+          }
         }
       '';
 
@@ -102,6 +107,13 @@
           config = function()
             require('direnv').setup({})
           end,
+        }
+      '';
+
+      snacks = ''
+        return {
+          'folke/snacks',
+          enabled = false,
         }
       '';
 
@@ -124,7 +136,7 @@
           },
           cmd = 'Neogit',
           keys = {
-            { '<leader>G', '<CMD>Neogit<CR>', desc = 'Show Neogit UI' }
+            { '<leader>gs', '<CMD>Neogit<CR>', mode = { "n" }, desc = 'Open Neogit' }
           },
         }
       '';
@@ -152,6 +164,10 @@
                 respect_gitignore = true,
               },
             },
+          },
+          keys = {
+            { '<leader>gs', false },
+            { '<leader>gS', false },
           },
         }
       '';
