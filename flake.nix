@@ -132,6 +132,7 @@
               imports = [
                 inputs.nix-index-database.homeModules.nix-index
                 inputs.lazyvim-nix.homeManagerModules.lazyvim
+                ./modules/opengl-driver
               ];
 
               nixpkgs.config.allowUnfree = true;
@@ -139,6 +140,8 @@
               home = {
                 stateVersion = "25.11";
               };
+
+              opengl-driver.enable = true;
             };
           };
         };
