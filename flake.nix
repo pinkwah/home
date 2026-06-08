@@ -40,6 +40,10 @@
       url = "github:marcoieni/intellimacs";
       flake = false;
     };
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "";
+    };
   };
 
   outputs =
@@ -116,6 +120,8 @@
                 ];
               };
               modules = [
+                inputs.self.homeModules.default
+                ./modules/default.nix
                 ./profiles/work-managed-macos.nix
                 {
                   home = {
@@ -124,6 +130,7 @@
                   };
                 }
               ];
+              extraSpecialArgs = { inherit inputs; };
             };
           };
 
@@ -132,6 +139,7 @@
               imports = [
                 inputs.nix-index-database.homeModules.nix-index
                 inputs.lazyvim-nix.homeManagerModules.lazyvim
+                inputs.nix-doom-emacs-unstraightened.homeModule
                 ./modules/opengl-driver
               ];
 
