@@ -83,14 +83,16 @@
             "zohar@ZOM-EquinorUMPC" = inputs.home-manager.lib.homeManagerConfiguration {
               pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
               modules = [
+                inputs.self.homeModules.default
                 ./profiles/work-unmanaged-linux.nix
                 {
                   home = {
                     username = "zohar";
-                    homeDirectory = "/var/home/zohar";
+                    homeDirectory = "/home/zohar";
                   };
                 }
               ];
+              extraSpecialArgs = { inherit inputs; };
             };
 
             # Managed Linux
