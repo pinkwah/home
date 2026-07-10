@@ -82,25 +82,6 @@
     };
 
     plugins = {
-      colorscheme = ''
-        return {
-          {
-            'diegoulloao/neofusion.nvim',
-            priority = 1000,
-            config = true,
-            opts = {},
-          },
-
-          -- Configure LazyVim to load theme
-          {
-            'LazyVim/LazyVim',
-            opts = {
-              colorscheme = 'neofusion',
-            },
-          }
-        }
-      '';
-
       direnv = ''
         return {
           'NotAShelf/direnv.nvim',

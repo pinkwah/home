@@ -68,11 +68,12 @@
               pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
               modules = [
                 inputs.self.homeModules.default
+                # ./modules/default.nix
                 ./profiles/personal.nix
                 {
                   home = {
                     username = "zohar";
-                    homeDirectory = "/var/home/zohar";
+                    homeDirectory = "/home/zohar";
                   };
                 }
               ];
