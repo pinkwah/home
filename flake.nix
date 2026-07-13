@@ -68,7 +68,7 @@
               pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
               modules = [
                 inputs.self.homeModules.default
-                # ./modules/default.nix
+                ./modules/default.nix
                 ./profiles/personal.nix
                 {
                   home = {

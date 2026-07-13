@@ -175,10 +175,7 @@
 
 (setq! lsp-enable-suggest-server-download nil)
 
-(use-package! lsp-tailwindcss
-  :after lsp-mode
-  :init
-  (setq! lsp-tailwindcss-add-on-mode t))
+(setq! lsp-tailwindcss-add-on-mode t)
 
 (use-package! lsp-pyright
   :custom (lsp-pyright-langserver-command "basedpyright"))

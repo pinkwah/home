@@ -9,8 +9,6 @@
 (package! meson-mode)
 (package! vala-mode)
 
-(package! lsp-tailwindcss :recipe (:host github :repo "pinkwah/lsp-tailwindcss"))
-
 (package! just-ts-mode)
 (package! justl)
 
