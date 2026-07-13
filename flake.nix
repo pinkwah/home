@@ -5,10 +5,12 @@
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://pinkwah.cachix.org"
+      "https://doom-emacs-unstraightened.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "pinkwah.cachix.org-1:ixwSFCqREV6E/3CAf4gjyd75PZQkRizMKzlkmlrdsx4="
+      "doom-emacs-unstraightened.cachix.org-1:O5oOlRPnmQEvVaFyuMTmthCEooHbrg54WgSLR07tmg4="
     ];
   };
 
@@ -42,7 +44,11 @@
     };
     nix-doom-emacs-unstraightened = {
       url = "github:marienz/nix-doom-emacs-unstraightened";
-      inputs.nixpkgs.follows = "";
+
+      inputs = {
+        doomdir.url = "./modules/doomemacs";
+        nixpkgs.follows = "";
+      };
     };
   };
 
