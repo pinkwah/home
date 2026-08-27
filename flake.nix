@@ -91,6 +91,7 @@
               pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
               modules = [
                 inputs.self.homeModules.default
+                ./modules/default.nix
                 ./profiles/work-unmanaged-linux.nix
                 {
                   home = {
