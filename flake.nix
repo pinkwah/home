@@ -79,7 +79,7 @@
                 {
                   home = {
                     username = "zohar";
-                    homeDirectory = "/home/zohar";
+                    homeDirectory = "/home/box";
                   };
                 }
               ];
