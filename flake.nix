@@ -68,15 +68,12 @@
         ];
 
         flake = {
-          homeConfigurations = {
-            # Personal
-            zohar = inputs.home-manager.lib.homeManagerConfiguration {
-              pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
-              modules = [
-                inputs.self.homeModules.default
-                ./modules/default.nix
-                ./profiles/personal.nix
+          homeConfigurations =
+            let
+
+              mkHome =
                 {
+<<<<<<< HEAD
                   home = {
                     username = "zohar";
                     homeDirectory = "/home/box";
@@ -85,64 +82,65 @@
               ];
               extraSpecialArgs = { inherit inputs; };
             };
+=======
+                  username ? "zohar",
+                  homeBase ? "/home",
+                  system ? "x86_64-linux",
+                  modules ? [ ],
+                }:
+                inputs.home-manager.lib.homeManagerConfiguration {
+                  pkgs = import inputs.nixpkgs { inherit system; };
+                  extraSpecialArgs = { inherit inputs; };
+                  modules = [
+                    inputs.self.homeModules.default
+                    ./modules/default.nix
+                    {
+                      home = {
+                        inherit username;
+                        homeDirectory = "${homeBase}/${username}";
+                      };
+                    }
+                  ]
+                  ++ modules;
+                };
+>>>>>>> 399de6b (update)
 
-            # Unmanaged Linux
-            "zohar@ZOM-EquinorUMPC" = inputs.home-manager.lib.homeManagerConfiguration {
-              pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
-              modules = [
-                inputs.self.homeModules.default
-                ./modules/default.nix
-                ./profiles/work-unmanaged-linux.nix
-                {
-                  home = {
-                    username = "zohar";
-                    homeDirectory = "/home/zohar";
-                  };
-                }
-              ];
-              extraSpecialArgs = { inherit inputs; };
-            };
+            in
+            {
+              # Personal
+              zohar = mkHome { modules = [ ./profiles/personal.nix ]; };
 
-            # Managed Linux
-            zom = inputs.home-manager.lib.homeManagerConfiguration {
-              pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
-              modules = [
-                ./profiles/work-managed-linux.nix
-                {
-                  home = {
-                    username = "zom";
-                    homeDirectory = "/private/zom";
-                  };
-                }
-              ];
-            };
-
-            # Managed macOS
-            ZOM = inputs.home-manager.lib.homeManagerConfiguration {
-              pkgs = import inputs.nixpkgs {
-                system = "aarch64-darwin";
-
-                # https://github.com/NixOS/nixpkgs/issues/507531#issuecomment-4391486390
-                overlays = [
-                  (_final: prev: {
-                    inherit (inputs.nixpkgs-darwin-fish-fix.legacyPackages.${prev.stdenv.hostPlatform.system}) fish;
-                  })
-                ];
+              # Unmanaged Linux
+              "zohar@ZOM-EquinorUMPC" = mkHome {
+                modules = [ ./profiles/work-managed-linux.nix ];
               };
-              modules = [
-                inputs.self.homeModules.default
-                ./modules/default.nix
-                ./profiles/work-managed-macos.nix
-                {
-                  home = {
-                    username = "ZOM";
-                    homeDirectory = "/Users/ZOM";
-                  };
-                }
-              ];
-              extraSpecialArgs = { inherit inputs; };
+
+              # Managed macOS
+              ZOM = inputs.home-manager.lib.homeManagerConfiguration {
+                pkgs = import inputs.nixpkgs {
+                  system = "aarch64-darwin";
+
+                  # https://github.com/NixOS/nixpkgs/issues/507531#issuecomment-4391486390
+                  overlays = [
+                    (_final: prev: {
+                      inherit (inputs.nixpkgs-darwin-fish-fix.legacyPackages.${prev.stdenv.hostPlatform.system}) fish;
+                    })
+                  ];
+                };
+                modules = [
+                  inputs.self.homeModules.default
+                  ./modules/default.nix
+                  ./profiles/work-managed-macos.nix
+                  {
+                    home = {
+                      username = "ZOM";
+                      homeDirectory = "/Users/ZOM";
+                    };
+                  }
+                ];
+                extraSpecialArgs = { inherit inputs; };
+              };
             };
-          };
 
           homeModules = {
             default = {

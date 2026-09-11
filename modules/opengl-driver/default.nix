@@ -7,8 +7,7 @@
 }:
 
 let
-  inherit (pkgs) zenity;
-  inherit (pkgs.stdenv) isLinux;
+  inherit (pkgs.stdenv.hostPlatform) isLinux;
   cfg = config.opengl-driver;
 
   setup = pkgs.writeShellScript "opengl-driver-setup" ''

@@ -93,15 +93,18 @@
 
   programs.ssh = {
     enable = true;
-    extraConfig = ''
-      Host phobos
-        Hostname phobos.hosts.zohar.no
-        User root
+    enableDefaultConfig = false;
+    settings = {
+      phobos = {
+        Hostname = "phobos.hosts.zohar.no";
+        User = "root";
+      };
 
-      Host deimos
-        Hostname deimos.hosts.zohar.no
-        User root
-    '';
+      deimos = {
+        Hostname = "deimos.hosts.zohar.no";
+        User = "root";
+      };
+    };
   };
 
   programs.uv = {
