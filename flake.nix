@@ -73,16 +73,6 @@
 
               mkHome =
                 {
-<<<<<<< HEAD
-                  home = {
-                    username = "zohar";
-                    homeDirectory = "/home/box";
-                  };
-                }
-              ];
-              extraSpecialArgs = { inherit inputs; };
-            };
-=======
                   username ? "zohar",
                   homeBase ? "/home",
                   system ? "x86_64-linux",
@@ -103,7 +93,6 @@
                   ]
                   ++ modules;
                 };
->>>>>>> 399de6b (update)
 
             in
             {

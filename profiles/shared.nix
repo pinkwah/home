@@ -39,7 +39,17 @@
   fonts.fontconfig.enable = true;
 
   programs.direnv.enable = true;
-  programs.fish.enable = true;
+
+  programs.fish = {
+    enable = true;
+
+    shellInit = ''
+      # On OSTree systems like Bazzite, /home is a symlink to /var/home, but $HOME is "/home/$USER".
+      if test "$PWD" = "/var$HOME"
+        cd -L "$HOME"
+      end
+    '';
+  };
 
   programs.git = {
     enable = true;
@@ -96,12 +106,7 @@
     enableDefaultConfig = false;
     settings = {
       phobos = {
-        Hostname = "phobos.hosts.zohar.no";
-        User = "root";
-      };
-
-      deimos = {
-        Hostname = "deimos.hosts.zohar.no";
+        Hostname = "phobos.tail0f913d.ts.net";
         User = "root";
       };
     };
